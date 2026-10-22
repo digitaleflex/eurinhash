@@ -34,6 +34,14 @@ Personal portfolio of Eurin Hash: Next.js 16 App Router, React 19, Tailwind v4, 
 - Styling is mostly hand-written CSS in `globals.css` (`.container-shell`, `.hero`, `.button`, `.card`, `.section`, `.eyebrow`, `.kicker`, `.space-bg`, `.orbit`) combined with Tailwind utilities in the same `className`. Reuse those classes instead of inventing new patterns.
 - 2-space indent, double quotes, conventional commits (`feat:`, `chore:`, `content:`). No Prettier; JSX is terse (a `<section>` and its `<div>` often share a line) — don't reformat whole files.
 
+## États d’interface et erreurs
+
+- Frontières App Router : `src/app/error.tsx` et `global-error.tsx` sont des Client Components ; ils reçoivent `{ error: unknown, reset, retry }` et « Réessayer » appelle `retry()` (en Next 16.4 `unstable_retry` n’existe plus, et `reset()` seul peut rejouer l’erreur en cache). `global-error.tsx` remplace le root layout : `<html>/<body>` et styles inline obligatoires, `globals.css` n’est pas appliqué. `loading.tsx` fournit le squelette racine, `not-found.tsx` rend un vrai 404 en production.
+- Primitives à réutiliser : `src/components/ui/alert.tsx` (`default`/`warning`/`danger`/`success`), `skeleton.tsx`, `empty-state.tsx`. Ne pas recréer un système parallèle de boutons, d’alertes ou de skeletons.
+- Tokens d’état dans `globals.css` : `--danger`, `--warning`, `--success`, `--muted`, `--surface` exposés via `@theme inline` (`text-danger`, `border-line`, `text-muted-foreground`, `bg-surface`). Rouge/ambre/vert uniquement pour l’état, toujours doublé d’une icône ou d’un libellé.
+- Messages : dire ce qui s’est passé, la conséquence et l’action possible, en français et au tutoiement. Jamais de message d’exception, stack, chemin interne, secret ou donnée personnelle ; `error.digest` est la seule référence exposée. `reportError()` (`src/lib/report-error.ts`) est le point d’entrée unique de journalisation (console en dev uniquement, à brancher sur un service de suivi).
+- Formulaire (aucun pour l’instant) : prévoir les états initial/en cours/succès/échec, `aria-invalid` + `aria-describedby` vers le message du champ, `role="alert"` pour l’échec de soumission, focus sur le premier champ invalide, action désactivée pendant l’envoi. Ne jamais simuler un succès.
+
 ## Traps
 
 - `next build` rewrites `tsconfig.json` (`jsx: "react-jsx"`, adds `.next/dev/types`, reformats it). Revert that churn before committing.
