@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Cloud, Code2, Network, ShieldCheck } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { HeroBackground } from "@/components/hero-background";
 
 const projects = [
   { name: "AURA Storage", status: "En développement", desc: "Un projet d’infrastructure que je construis pour organiser et servir des ressources numériques.", tags: ["Stockage", "Infrastructure"], mark: "AURA" },
@@ -28,16 +29,20 @@ export default function Home() {
     <SiteHeader current="/" />
     <main>
       <section className="hero">
-        <div className="space-bg" aria-hidden="true"><div className="orbit" /></div>
+        <HeroBackground />
         <div className="container-shell hero-content">
-          <div className="eyebrow">Eurin Hash · Ingénierie numérique & apprentissage</div>
-          <h1>De l’idée<br />au <span className="accent">système.</span></h1>
-          <p>Je suis Eurin Hash. Je conçois et construis des solutions numériques, j’explore l’architecture des systèmes et j’apprends en faisant.</p>
+          <div className="eyebrow hero-eyebrow">Eurin Hash · Ingénierie numérique & apprentissage</div>
+          <h1 className="hero-title">
+            <span className="hero-line hero-line--one">De l’idée</span>
+            <br />
+            <span className="hero-line hero-line--two">au <span className="accent hero-accent">système.</span></span>
+          </h1>
+          <p className="hero-desc">Je suis Eurin Hash. Je conçois et construis des solutions numériques, j’explore l’architecture des systèmes et j’apprends en faisant.</p>
           <div className="actions">
-            <Link className="button" href="/projets">Voir mes projets <ArrowRight size={16} /></Link>
-            <Link className="button secondary" href="/contact">Me contacter <ArrowUpRight size={16} /></Link>
+            <Link className="button hero-btn hero-btn--one" href="/projets">Voir mes projets <ArrowRight size={16} /></Link>
+            <Link className="button secondary hero-btn hero-btn--two" href="/contact">Me contacter <ArrowUpRight size={16} /></Link>
           </div>
-          <div className="hero-tags"><span>Architecture</span><span>Cloud & infrastructure</span><span>Cybersécurité</span><span>Développement</span></div>
+          <div className="hero-tags hero-tags-group"><span>Architecture</span><span>Cloud & infrastructure</span><span>Cybersécurité</span><span>Développement</span></div>
         </div>
       </section>
 
@@ -85,7 +90,7 @@ export default function Home() {
           <div><div className="kicker">Notes & analyses</div><h2>Idées en cours d’exploration.</h2>
             <article className="note"><small>Architecture · À venir</small><h3>Comment choisir une architecture adaptée à un projet ?</h3></article>
             <article className="note"><small>Infrastructure · À venir</small><h3>Les bases d’une infrastructure fiable et observable</h3></article>
-            <Link className="text-link mt-5 inline-flex items-center gap-2 text-blue-300" href="/notes">Lire mes notes <ArrowRight size={15} /></Link>
+            <Link className="mt-5 inline-flex items-center gap-2 text-accent-soft" href="/notes">Lire mes notes <ArrowRight size={15} /></Link>
           </div>
         </div>
       </section>
