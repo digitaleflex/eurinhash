@@ -1,9 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Github } from "lucide-react";
 
 export function SiteFooter() {
   return <footer className="site-footer"><div className="container-shell grid gap-8 py-10 md:grid-cols-[1fr_auto] md:items-end">
-    <div><Link className="wordmark text-lg" href="/">EURINH<span>A</span>SH</Link>
+    <div><Link className="wordmark text-lg" href="/"><Image src="/eurinhash-wordmark-trim.png" alt="" width={480} height={51} className="h-[20px] w-auto" /></Link>
       <p className="mt-3 max-w-md text-sm leading-6 text-white/45">Le site personnel d’Eurin Hash : parcours, projets, apprentissages et expérimentations en ingénierie numérique.</p>
     </div>
     <div className="flex flex-wrap items-center gap-5 text-sm text-white/55">

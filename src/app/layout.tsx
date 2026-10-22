@@ -8,6 +8,13 @@ export const metadata: Metadata = {
     template: "%s — Eurin Hash"
   },
   description: "Le site personnel d’Eurin Hash : parcours, projets, compétences et réflexions autour du développement, du cloud, de l’architecture des systèmes et de la cybersécurité.",
+  icons: {
+    icon: [
+      { url: "/icon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" }
+    ],
+    apple: [{ url: "/apple-icon-180.png", sizes: "180x180", type: "image/png" }]
+  },
   openGraph: {
     type: "website",
     locale: "fr_FR",
