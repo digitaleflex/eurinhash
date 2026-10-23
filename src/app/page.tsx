@@ -19,142 +19,146 @@ const steps = [
   ["04", "Améliorer", "Apprendre du résultat et faire évoluer la solution."]
 ];
 
+type SelectedLink = { label: string; href: string; variant?: "primary" | "secondary" };
+
+type SelectedProject = {
+  id: string;
+  category: string;
+  title: string;
+  description: string;
+  tech: string[];
+  image: string;
+  alt: string;
+  links: SelectedLink[];
+  status?: string;
+};
+
+const selectedProjects: SelectedProject[] = [
+  {
+    id: "aura-storage",
+    category: "Cloud & infrastructure",
+    title: "AURA Storage",
+    description: "Une plateforme de stockage conçue pour organiser, transférer et gérer des fichiers à travers une infrastructure auto-hébergée, une API et des services de stockage compatibles S3.",
+    tech: ["Docker Compose", "Traefik", "PostgreSQL", "S3/SeaweedFS"],
+    image: "/aura_storage.webp",
+    alt: "Infrastructure de stockage : baies de serveurs, nuage lumineux et explorateur de fichiers.",
+    links: [
+      { label: "Explorer le projet", href: "https://github.com/digitaleflex/aura-storage", variant: "primary" },
+      { label: "Voir l’architecture", href: "https://github.com/digitaleflex/aura-storage/tree/main/docs#architecture", variant: "secondary" }
+    ]
+  },
+  {
+    id: "wpopsx",
+    category: "DevOps & observabilité",
+    title: "WPOpsX",
+    description: "Un environnement d’exploitation WordPress conçu autour de conteneurs, d’un reverse proxy et d’outils de supervision pour structurer le déploiement et l’observabilité.",
+    tech: ["Docker", "Traefik", "MariaDB", "Redis"],
+    image: "/wpopsx.webp",
+    alt: "Pile de conteneurs Docker, Traefik, MariaDB et Redis devant un tableau de bord de supervision.",
+    links: [{ label: "Explorer le projet", href: "https://github.com/digitaleflex/WPOpsX" }]
+  },
+  {
+    id: "hashcode-reboot",
+    category: "Full-stack & produit numérique",
+    title: "HashCode Reboot",
+    description: "Une plateforme pensée pour structurer l’intégration des membres, les parcours communautaires et la qualification des profils au sein de l’écosystème HashCode.",
+    tech: ["Next.js", "PostgreSQL", "Prisma", "BetterAuth"],
+    image: "/hashcode_reboot.webp",
+    alt: "Ordinateur portable affichant un tableau de bord, entouré de tuiles de profils et de progression.",
+    links: [{ label: "Explorer le projet", href: "https://github.com/digitaleflex/hashcode_reboot" }]
+  },
+  {
+    id: "eurinhash-ai-lab",
+    category: "IA appliquée & expérimentation",
+    title: "EurinHash AI Lab",
+    description: "Un laboratoire d’expérimentation consacré à l’évaluation des modèles d’IA, à l’orchestration des agents, à la résilience et à l’optimisation des coûts.",
+    tech: ["AI/ML", "Agents", "Benchmarks", "Prototypes"],
+    image: "/eurin_ai_lab.webp",
+    alt: "Laboratoire d’IA : cerveau lumineux dans un cube, entouré d’écrans de graphes et de mesures.",
+    links: [{ label: "Explorer le projet", href: "https://github.com/digitaleflex/eurinhash-ai-lab" }]
+  },
+  {
+    id: "joinhashcode",
+    category: "Cybersécurité & communauté",
+    title: "JoinHashCode",
+    description: "Une plateforme communautaire orientée vers l’apprentissage technique, la cybersécurité et la structuration de parcours de progression.",
+    tech: ["Next.js", "PostgreSQL", "Prisma", "BetterAuth"],
+    image: "/joinhashcode.webp",
+    alt: "Espace collaboratif : globe connecté, tuiles de parcours et cadenas de sécurité.",
+    links: [],
+    status: "En cours"
+  }
+];
+
 export default function Home() {
   return (
     <>
       <SiteHeader current="/" />
       <main>
-        <section className="hero">
+        <section className="hero hero--home">
           <HeroBackground />
           <div className="container-shell hero-content">
-            <div className="eyebrow hero-eyebrow">Eurin Hash · Ingénierie numérique & apprentissage</div>
+            <div className="eyebrow hero-eyebrow">Eurin Hash · Infrastructure, plateformes &amp; IA appliquée</div>
             <h1 className="hero-title">
               <span className="hero-line hero-line--one">De l’idée</span>
               <br />
               <span className="hero-line hero-line--two">au <span className="accent hero-accent">système.</span></span>
             </h1>
-            <p className="hero-desc">Je suis Eurin Hash. Je conçois et construis des solutions numériques, j’explore l’architecture des systèmes et j’apprends en faisant.</p>
+            <p className="hero-desc">Je construis des systèmes complets — stockage auto-hébergé, plateformes web, supervision — et je documente les choix techniques derrière chacun. Les dépôts sont sur GitHub.</p>
             <div className="actions">
               <Link className="button hero-btn hero-btn--one" href="/projets">Voir mes projets <ArrowRight size={16} /></Link>
               <Link className="button secondary hero-btn hero-btn--two" href="/contact">Me contacter <ArrowUpRight size={16} /></Link>
             </div>
-            <div className="hero-tags hero-tags-group"><span>Architecture</span><span>Cloud & infrastructure</span><span>Cybersécurité</span><span>Développement</span></div>
+            <div className="hero-tags hero-tags-group"><span>Infrastructure auto-hébergée</span><span>Plateformes Next.js</span><span>Observabilité</span><span>Agents IA</span></div>
           </div>
+          <a className="hero-scroll" href="#projets" aria-label="Aller aux projets sélectionnés">
+            <span className="hero-scroll-rail" aria-hidden="true" />
+            <span>Défiler</span>
+          </a>
         </section>
 
-        <section className="section">
+        <section className="section" id="projets">
           <div className="container-shell">
-            <div className="kicker">Projets sélectionnés</div>
-            <h2>Des idées transformées en systèmes concrets.</h2>
-            <p>Je conçois des applications, des infrastructures et des outils qui explorent les possibilités du logiciel, du cloud et de l’intelligence artificielle. Voici cinq projets qui illustrent différentes facettes de mon travail.</p>
-            <div className="selected-cards" data-columns="3">
-              <article className="selected-card large" data-project-id="aura-storage">
-                <div className="selected-card-visual">
-                  <Image src="/aura_storage.png" alt="" fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" priority />
-                </div>
-                <div className="selected-card-content">
-                  <div className="selected-card-meta">
-                    <span className="selected-card-category">CLOUD & INFRASTRUCTURE</span>
-                  </div>
-                  <h3 className="selected-card-title">AURA Storage</h3>
-                  <p className="selected-card-desc">Une plateforme de stockage conçue pour organiser, transférer et gérer des fichiers à travers une infrastructure auto-hébergée, une API et des services de stockage compatibles S3.</p>
-                  <div className="selected-card-tech">
-                    <span>Docker Compose</span>
-                    <span>Traefik</span>
-                    <span>PostgreSQL</span>
-                    <span>S3/SeaweedFS</span>
-                  </div>
-                  <div className="selected-card-actions">
-                    <Link className="selected-card-link" href="https://github.com/digitaleflex/aura-storage" target="_blank" rel="noreferrer">Explorer le projet <ArrowRight size={12} /></Link>
-                    <Link className="selected-card-link secondary" href="https://github.com/digitaleflex/aura-storage/tree/main/docs#architecture" target="_blank" rel="noreferrer">Voir l&#39;architecture <ArrowRight size={12} /></Link>
-                  </div>
-                </div>
-              </article>
-              <article className="selected-card" data-project-id="wpopsx">
-                <div className="selected-card-visual">
-                  <Image src="/wpopsx.png" alt="" fill sizes="(max-width: 768px) 100vw, 32vw" className="object-cover" />
-                </div>
-                <div className="selected-card-content">
-                  <div className="selected-card-meta">
-                    <span className="selected-card-category">DEVOPS & OBSERVABILITÉ</span>
-                  </div>
-                  <h3 className="selected-card-title">WPOpsX</h3>
-                  <p className="selected-card-desc">Un environnement d’exploitation WordPress conçu autour de conteneurs, d’un reverse proxy et d’outils de supervision pour structurer le déploiement et l’observabilité.</p>
-                  <div className="selected-card-tech">
-                    <span>Docker</span>
-                    <span>Traefik</span>
-                    <span>MariaDB</span>
-                    <span>Redis</span>
-                  </div>
-                  <div className="selected-card-actions">
-                    <Link className="selected-card-link" href="https://github.com/digitaleflex/WPOpsX" target="_blank" rel="noreferrer">Explorer le projet <ArrowRight size={12} /></Link>
-                  </div>
-                </div>
-              </article>
-              <article className="selected-card" data-project-id="hashcode-reboot">
-                <div className="selected-card-visual">
-                  <Image src="/hashcode_reboot.png" alt="" fill sizes="(max-width: 768px) 100vw, 32vw" className="object-cover" />
-                </div>
-                <div className="selected-card-content">
-                  <div className="selected-card-meta">
-                    <span className="selected-card-category">FULL-STACK & PRODUIT NUMÉRIQUE</span>
-                  </div>
-                  <h3 className="selected-card-title">HashCode Reboot</h3>
-                  <p className="selected-card-desc">Une plateforme pensée pour structurer l’intégration des membres, les parcours communautaires et la qualification des profils au sein de l’écosystème HashCode.</p>
-                  <div className="selected-card-tech">
-                    <span>Next.js</span>
-                    <span>PostgreSQL</span>
-                    <span>Prisma</span>
-                    <span>BetterAuth</span>
-                  </div>
-                  <div className="selected-card-actions">
-                    <Link className="selected-card-link" href="https://github.com/digitaleflex/hashcode_reboot" target="_blank" rel="noreferrer">Explorer le projet <ArrowRight size={12} /></Link>
-                  </div>
-                </div>
-              </article>
-              <article className="selected-card" data-project-id="eurinhash-ai-lab">
-                <div className="selected-card-visual">
-                  <Image src="/eurin_ai_lab.png" alt="" fill sizes="(max-width: 768px) 100vw, 32vw" className="object-cover" />
-                </div>
-                <div className="selected-card-content">
-                  <div className="selected-card-meta">
-                    <span className="selected-card-category">IA APPLIQUÉE & EXPÉRIMENTATION</span>
-                  </div>
-                  <h3 className="selected-card-title">EurinHash AI Lab</h3>
-                  <p className="selected-card-desc">Un laboratoire d’expérimentation consacré à l’évaluation des modèles d’IA, à l’orchestration des agents, à la résilience et à l’optimisation des coûts.</p>
-                  <div className="selected-card-tech">
-                    <span>AI/ML</span>
-                    <span>Agents</span>
-                    <span>Benchmarks</span>
-                    <span>Prototypes</span>
-                  </div>
-                  <div className="selected-card-actions">
-                    <Link className="selected-card-link" href="https://github.com/digitaleflex/eurinhash-ai-lab" target="_blank" rel="noreferrer">Explorer le laboratoire <ArrowRight size={12} /></Link>
-                  </div>
-                </div>
-              </article>
-              <article className="selected-card" data-project-id="joinhashcode">
-                <div className="selected-card-visual">
-                  <Image src="/joinhashcode.png" alt="" fill sizes="(max-width: 768px) 100vw, 32vw" className="object-cover" />
-                </div>
-                <div className="selected-card-content">
-                  <div className="selected-card-meta">
-                    <span className="selected-card-category">CYBERSÉCURITÉ & COMMUNAUTÉ</span>
-                  </div>
-                  <h3 className="selected-card-title">JoinHashCode</h3>
-                  <p className="selected-card-desc">Une plateforme communautaire orientée vers l’apprentissage technique, la cybersécurité et la structuration de parcours de progression.</p>
-                  <div className="selected-card-tech">
-                    <span>Next.js</span>
-                    <span>PostgreSQL</span>
-                    <span>Prisma</span>
-                    <span>BetterAuth</span>
-                  </div>
-                  <div className="selected-card-actions">
-                  </div>
-                </div>
-              </article>
+            <div className="selected-rule">
+              <span className="kicker">Projets sélectionnés</span>
+              <span className="selected-rule-meta">05 projets</span>
             </div>
-            <Link className="button secondary mt-7" href="/projets">Explorer l’ensemble des projets <ArrowRight size={15} /></Link>
+            <div className="selected-head">
+              <h2>Des idées transformées en systèmes concrets.</h2>
+              <p className="selected-intro">Cinq projets, chacun répondant à un problème concret : stockage auto-hébergé, exploitation WordPress, plateformes communautaires, évaluation de modèles.</p>
+            </div>
+            <div className="selected-grid">
+              {selectedProjects.map((project, index) => {
+                const featured = index === 0;
+                return (
+                  <article key={project.id} className={featured ? "selected-card selected-card--featured" : "selected-card"} data-project-id={project.id}>
+                    <div className="selected-card-media">
+                      <Image src={project.image} alt={project.alt} fill sizes={featured ? "(max-width: 1000px) 100vw, 580px" : "(max-width: 760px) 100vw, 560px"} className="selected-card-img" />
+                      {featured && <span className="selected-card-badge">À la une</span>}
+                    </div>
+                    <div className="selected-card-body">
+                      <div className="selected-card-eyebrow">
+                        <span className="selected-card-index">{String(index + 1).padStart(2, "0")}</span>
+                        <span className="selected-card-category">{project.category}</span>
+                      </div>
+                      <h3 className="selected-card-title">{project.title}</h3>
+                      <p className="selected-card-desc">{project.description}</p>
+                      <ul className="selected-card-tech">
+                        {project.tech.map((tech) => <li key={tech}>{tech}</li>)}
+                      </ul>
+                      <div className="selected-card-actions">
+                        {project.links.map((link) => <Link key={link.href} className={link.variant ? `selected-card-link ${link.variant}` : "selected-card-link"} href={link.href} target="_blank" rel="noreferrer">{link.label} <ArrowRight size={13} /></Link>)}
+                        {project.status && <span className="selected-card-status">{project.status}</span>}
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+            <div className="selected-footer">
+              <p>Une sélection resserrée, mise à jour au fil des avancées.</p>
+              <Link className="button secondary" href="/projets">Explorer l’ensemble des projets <ArrowRight size={15} /></Link>
+            </div>
           </div>
         </section>
 

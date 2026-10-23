@@ -91,40 +91,78 @@ const edges: Edge[] = [
 
 export function HeroBackground() {
   const root = useRef<HTMLDivElement | null>(null);
+  const spot = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const element = root.current;
     if (!element) return;
 
+    const hero = element.closest<HTMLElement>(".hero");
     const finePointer = window.matchMedia("(pointer: fine)");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0;
-    let pointerX = 0;
-    let pointerY = 0;
-
-    const paint = () => {
-      frame = 0;
-      element.style.setProperty("--px", pointerX.toFixed(3));
-      element.style.setProperty("--py", pointerY.toFixed(3));
-    };
+    let moveFrame = 0;
+    let scrollFrame = 0;
+    let clientX = 0;
+    let clientY = 0;
 
     /* Une seule écriture CSS par image, sans rendu React. */
-    const handleMove = (event: PointerEvent) => {
-      if (event.pointerType !== "mouse") return;
-      pointerX = (event.clientX / window.innerWidth - 0.5) * 2;
-      pointerY = (event.clientY / window.innerHeight - 0.5) * 2;
-      if (!frame) frame = window.requestAnimationFrame(paint);
+    const paintPointer = () => {
+      moveFrame = 0;
+      const rect = element.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      element.style.setProperty("--px", ((clientX / window.innerWidth - 0.5) * 2).toFixed(3));
+      element.style.setProperty("--py", ((clientY / window.innerHeight - 0.5) * 2).toFixed(3));
+      element.style.setProperty("--mx", (((clientX - rect.left) / rect.width) * 100).toFixed(2) + "%");
+      element.style.setProperty("--my", (((clientY - rect.top) / rect.height) * 100).toFixed(2) + "%");
+      if (spot.current && spot.current.dataset.on !== "true") spot.current.dataset.on = "true";
     };
 
-    const sync = () => {
-      const active = finePointer.matches && !reducedMotion.matches;
-      if (active) {
+    const handleMove = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") return;
+      clientX = event.clientX;
+      clientY = event.clientY;
+      if (!moveFrame) moveFrame = window.requestAnimationFrame(paintPointer);
+    };
+
+    /* Progression de sortie du hero : profondeur au défilement. */
+    const paintScroll = () => {
+      scrollFrame = 0;
+      if (!hero) return;
+      const rect = hero.getBoundingClientRect();
+      const progress = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height, 1)));
+      hero.style.setProperty("--scroll", progress.toFixed(3));
+    };
+
+    const handleScroll = () => {
+      if (!scrollFrame) scrollFrame = window.requestAnimationFrame(paintScroll);
+    };
+
+    const syncPointer = () => {
+      if (finePointer.matches && !reducedMotion.matches) {
         window.addEventListener("pointermove", handleMove, { passive: true });
         return;
       }
       window.removeEventListener("pointermove", handleMove);
       element.style.removeProperty("--px");
       element.style.removeProperty("--py");
+      element.style.removeProperty("--mx");
+      element.style.removeProperty("--my");
+      if (spot.current) spot.current.dataset.on = "false";
+    };
+
+    const syncScroll = () => {
+      if (reducedMotion.matches) {
+        window.removeEventListener("scroll", handleScroll);
+        hero?.style.removeProperty("--scroll");
+        return;
+      }
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      paintScroll();
+    };
+
+    const sync = () => {
+      syncPointer();
+      syncScroll();
     };
 
     sync();
@@ -133,15 +171,18 @@ export function HeroBackground() {
 
     return () => {
       window.removeEventListener("pointermove", handleMove);
+      window.removeEventListener("scroll", handleScroll);
       finePointer.removeEventListener("change", sync);
       reducedMotion.removeEventListener("change", sync);
-      if (frame) window.cancelAnimationFrame(frame);
+      if (moveFrame) window.cancelAnimationFrame(moveFrame);
+      if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
     };
   }, []);
 
   return <div className="hero-bg" ref={root} aria-hidden="true">
     <div className="hero-bg__grid" />
     <div className="hero-bg__glow" />
+    <div className="hero-bg__spot" ref={spot} />
     <div className="hero-bg__visual">
       <svg className="hero-bg__svg" viewBox="0 0 1200 760" preserveAspectRatio="xMaxYMid slice">
         <defs>
