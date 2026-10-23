@@ -40,6 +40,9 @@ Thumbs.db
 desktop.ini
 *.pem
 
+# local-only sources (derived assets are committed instead)
+public/globe_hero.png
+
 # editors
 .vscode/*
 !.vscode/extensions.json
