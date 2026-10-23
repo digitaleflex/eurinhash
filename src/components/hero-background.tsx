@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { HeroNetworkAnimation } from "./hero-network-animation";
 
 /* Couche décorative du Hero : réseau de systèmes + structure orbitale.
    Purement visuelle (aria-hidden, pointer-events:none) et désactivée
@@ -180,6 +181,7 @@ export function HeroBackground() {
   }, []);
 
   return <div className="hero-bg" ref={root} aria-hidden="true">
+    <div className="hero-bg__photo" />
     <div className="hero-bg__grid" />
     <div className="hero-bg__glow" />
     <div className="hero-bg__spot" ref={spot} />
@@ -240,6 +242,7 @@ export function HeroBackground() {
         </g>
       </svg>
     </div>
+    <HeroNetworkAnimation />
     <div className="hero-bg__veil" />
   </div>;
 }

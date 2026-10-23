@@ -4,6 +4,8 @@ import { ArrowRight, ArrowUpRight, Cloud, Code2, Network, ShieldCheck } from "lu
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { HeroBackground } from "@/components/hero-background";
+import { HeroContent } from "@/components/hero-content";
+import { ScrollReveals } from "@/components/scroll-reveals";
 
 const interests = [
   { icon: Network, title: "Architecture des systèmes", desc: "Penser des systèmes cohérents, maintenables et adaptés à leurs contraintes." },
@@ -95,26 +97,10 @@ export default function Home() {
     <>
       <SiteHeader current="/" />
       <main>
+        <ScrollReveals />
         <section className="hero hero--home">
           <HeroBackground />
-          <div className="container-shell hero-content">
-            <div className="eyebrow hero-eyebrow">Eurin Hash · Infrastructure, plateformes &amp; IA appliquée</div>
-            <h1 className="hero-title">
-              <span className="hero-line hero-line--one">De l’idée</span>
-              <br />
-              <span className="hero-line hero-line--two">au <span className="accent hero-accent">système.</span></span>
-            </h1>
-            <p className="hero-desc">Je construis des systèmes complets — stockage auto-hébergé, plateformes web, supervision — et je documente les choix techniques derrière chacun. Les dépôts sont sur GitHub.</p>
-            <div className="actions">
-              <Link className="button hero-btn hero-btn--one" href="/projets">Voir mes projets <ArrowRight size={16} /></Link>
-              <Link className="button secondary hero-btn hero-btn--two" href="/contact">Me contacter <ArrowUpRight size={16} /></Link>
-            </div>
-            <div className="hero-tags hero-tags-group"><span>Infrastructure auto-hébergée</span><span>Plateformes Next.js</span><span>Observabilité</span><span>Agents IA</span></div>
-          </div>
-          <a className="hero-scroll" href="#projets" aria-label="Aller aux projets sélectionnés">
-            <span className="hero-scroll-rail" aria-hidden="true" />
-            <span>Défiler</span>
-          </a>
+          <HeroContent />
         </section>
 
         <section className="section" id="projets">
@@ -123,7 +109,7 @@ export default function Home() {
               <span className="kicker">Projets sélectionnés</span>
               <span className="selected-rule-meta">05 projets</span>
             </div>
-            <div className="selected-head">
+            <div className="selected-head" data-reveal>
               <h2>Des idées transformées en systèmes concrets.</h2>
               <p className="selected-intro">Cinq projets, chacun répondant à un problème concret : stockage auto-hébergé, exploitation WordPress, plateformes communautaires, évaluation de modèles.</p>
             </div>
@@ -131,7 +117,7 @@ export default function Home() {
               {selectedProjects.map((project, index) => {
                 const featured = index === 0;
                 return (
-                  <article key={project.id} className={featured ? "selected-card selected-card--featured" : "selected-card"} data-project-id={project.id}>
+                  <article key={project.id} className={featured ? "selected-card selected-card--featured" : "selected-card"} data-project-id={project.id} data-reveal data-reveal-delay={Math.min(index * 0.06, 0.24)}>
                     <div className="selected-card-media">
                       <Image src={project.image} alt={project.alt} fill sizes={featured ? "(max-width: 1000px) 100vw, 580px" : "(max-width: 760px) 100vw, 560px"} className="selected-card-img" />
                       {featured && <span className="selected-card-badge">À la une</span>}
@@ -155,7 +141,7 @@ export default function Home() {
                 );
               })}
             </div>
-            <div className="selected-footer">
+            <div className="selected-footer" data-reveal>
               <p>Une sélection resserrée, mise à jour au fil des avancées.</p>
               <Link className="button secondary" href="/projets">Explorer l’ensemble des projets <ArrowRight size={15} /></Link>
             </div>
@@ -165,9 +151,9 @@ export default function Home() {
         <section className="section">
           <div className="container-shell">
             <div className="kicker">Compétences & centres d’intérêt</div>
-            <h2>Relier la réflexion à la pratique.</h2>
+            <h2 data-reveal>Relier la réflexion à la pratique.</h2>
             <p className="intro">Les domaines dans lesquels je développe mes compétences et mène mes expérimentations.</p>
-            <div className="service-grid">{interests.map(({ icon: Icon, title, desc }) => <article className="card" key={title}>
+            <div className="service-grid">{interests.map(({ icon: Icon, title, desc }, i) => <article className="card" key={title} data-reveal data-reveal-delay={Math.min(i * 0.06, 0.18)}>
               <Icon size={23} color="#69a9ff" /><h3>{title}</h3><p>{desc}</p>
             </article>)}</div>
             <Link className="button secondary mt-7" href="/services">Voir mes compétences <ArrowRight size={15} /></Link>
@@ -176,9 +162,9 @@ export default function Home() {
 
         <section className="section">
           <div className="container-shell">
-            <div className="kicker">Ma méthode</div><h2>Apprendre en construisant.</h2>
+            <div className="kicker">Ma méthode</div><h2 data-reveal>Apprendre en construisant.</h2>
             <p className="intro">Une démarche simple qui m’aide à garder le cap dans mes projets, même lorsque les contraintes sont fortes.</p>
-            <div className="steps">{steps.map(([n, title, desc]) => <article className="step" key={n}>
+            <div className="steps">{steps.map(([n, title, desc], i) => <article className="step" key={n} data-reveal data-reveal-delay={Math.min(i * 0.06, 0.18)}>
               <span className="step-num">{n}</span><h3>{title}</h3><p>{desc}</p>
             </article>)}</div>
           </div>
@@ -186,11 +172,11 @@ export default function Home() {
 
         <section className="section">
           <div className="container-shell split">
-            <div><div className="kicker">À propos de moi</div><h2>La technologie, par curiosité et par pratique.</h2>
+            <div data-reveal><div className="kicker">À propos de moi</div><h2>La technologie, par curiosité et par pratique.</h2>
               <p className="intro">Mon site personnel rassemble mon parcours, mes réflexions et les projets sur lesquels je travaille. J’y partage ce que j’apprends, les problèmes que j’explore et les solutions que je tente de construire.</p>
               <Link className="button secondary mt-6" href="/a-propos">Découvrir mon parcours <ArrowRight size={15} /></Link>
             </div>
-            <div><div className="kicker">Notes & analyses</div><h2>Idées en cours d’exploration.</h2>
+            <div data-reveal data-reveal-delay={0.1}><div className="kicker">Notes & analyses</div><h2>Idées en cours d’exploration.</h2>
               <article className="note"><small>Architecture · À venir</small><h3>Comment choisir une architecture adaptée à un projet ?</h3></article>
               <article className="note"><small>Infrastructure · À venir</small><h3>Les bases d’une infrastructure fiable et observable</h3></article>
               <Link className="mt-5 inline-flex items-center gap-2 text-accent-soft" href="/notes">Lire mes notes <ArrowRight size={15} /></Link>
@@ -199,7 +185,7 @@ export default function Home() {
         </section>
 
         <section className="section">
-          <div className="container-shell"><div className="cta">
+          <div className="container-shell"><div className="cta" data-reveal>
             <div className="kicker">Échangeons</div><h2>Une idée, une question, un projet ?</h2>
             <p className="intro">Je suis ouvert aux échanges autour de la technologie, de l’ingénierie et des projets numériques.</p>
             <Link className="button mt-5" href="/contact">Entrer en contact <ArrowUpRight size={16} /></Link>
