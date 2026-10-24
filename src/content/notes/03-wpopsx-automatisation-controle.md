@@ -6,6 +6,7 @@ category: "Cloud & DevOps"
 tags: ["WPOpsX", "Docker", "Traefik", "Sécurité", "Automatisation"]
 project: "WPOpsX"
 status: "draft"
+updatedAt: "2026-10-24"
 ---
 
 # Automatiser sans perdre le contrôle

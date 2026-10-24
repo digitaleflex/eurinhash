@@ -35,6 +35,7 @@ export type PublicNoteMeta = {
   tags: string[];
   status: Exclude<NoteStatus, "draft">;
   publishedAt?: string;
+  updatedAt?: string;
   readingTime: number;
   project?: NoteProject;
 };
@@ -128,7 +129,7 @@ export function parseFrontmatter(raw: string): { data: Record<string, Frontmatte
     data[key] = value.replace(/^["']|["']$/g, "");
   }
 
-  return { data, body: raw.slice(match[0].length) };
+  return { data, body: raw.slice(match[0].length).trimStart() };
 }
 
 /** Retire le H1 d’ouverture : le titre est rendu par l’en-tête d’article. */
@@ -186,6 +187,7 @@ export function toPublicMeta(note: Note): PublicNoteMeta {
     tags: note.tags,
     status: note.status === "draft" ? "review" : note.status,
     publishedAt: note.publishedAt,
+    updatedAt: note.updatedAt,
     readingTime: readingTimeFromMarkdown(note.markdown),
     project: note.project,
   };

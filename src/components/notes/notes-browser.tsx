@@ -112,7 +112,11 @@ export function NotesBrowser({ notes }: Props) {
                   <div className="notes-item__top">
                     <span className="notes-item__cat">{categoryLabel(note.category)}</span>
                     <span className="notes-item__meta">
-                      {date ? <time dateTime={note.publishedAt}>{date}</time> : <span>Version de travail</span>}
+                      {date ? (
+                        <time dateTime={note.publishedAt}>{date}</time>
+                      ) : (
+                        <span>Version de travail{note.updatedAt ? ` · révisé le ${formatDate(note.updatedAt)}` : ""}</span>
+                      )}
                       <span aria-hidden="true">·</span>
                       <span>{note.readingTime} min de lecture</span>
                     </span>

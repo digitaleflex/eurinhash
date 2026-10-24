@@ -6,6 +6,7 @@ category: "Cloud & DevOps"
 tags: ["AURA Storage", "Stockage objet", "Docker", "Sauvegarde", "Fiabilité"]
 project: "AURA Storage"
 status: "draft"
+updatedAt: "2026-10-24"
 ---
 
 # Déployé ne signifie pas fiable

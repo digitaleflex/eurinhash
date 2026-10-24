@@ -6,6 +6,7 @@ category: "Learning Systems"
 tags: ["HashCode", "HEF", "Formation technique", "Curriculum", "Compétences"]
 project: "HashCode Engineering Foundations"
 status: "draft"
+updatedAt: "2026-10-24"
 ---
 
 # Apprendre l'ingénierie ne consiste pas à accumuler des tutoriels

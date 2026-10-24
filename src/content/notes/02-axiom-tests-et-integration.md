@@ -6,6 +6,7 @@ category: "Qualité logicielle"
 tags: ["Axiom", "Tests", "Intégration", "Go", "CI/CD"]
 project: "Axiom"
 status: "draft"
+updatedAt: "2026-10-24"
 ---
 
 # Des modules fonctionnels ne garantissent pas un produit fonctionnel
