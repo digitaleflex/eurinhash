@@ -13,7 +13,7 @@ const focusAreas = [
 export default function AboutPage() {
   return <>
     <SiteHeader current="/a-propos" />
-    <main>
+    <main id="contenu">
       <section className="hero"><div className="container-shell hero-content">
         <div className="eyebrow">Profil personnel</div>
         <h1>Je suis <span className="accent">Eurin Hash.</span></h1>

@@ -1,5 +1,18 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+
+const sans = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jetbrains",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://eurinhash.com"),
@@ -22,7 +35,10 @@ export const metadata: Metadata = {
     title: "Eurin Hash — Site personnel & portfolio",
     description: "Mon parcours, mes projets personnels et mes réflexions autour de l’ingénierie numérique."
   },
-  robots: { index: true, follow: true }
+  robots: { index: true, follow: true },
+  alternates: {
+    types: { "application/rss+xml": "/feed.xml" }
+  }
 };
 
 export const viewport: Viewport = {
@@ -31,5 +47,12 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="fr"><body>{children}</body></html>;
+  return (
+    <html lang="fr" className={`${sans.variable} ${mono.variable}`}>
+      <body>
+        <a className="skip-link" href="#contenu">Aller au contenu</a>
+        {children}
+      </body>
+    </html>
+  );
 }

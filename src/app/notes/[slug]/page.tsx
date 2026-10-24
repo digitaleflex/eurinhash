@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { ArrowLeft, ArrowRight, ArrowUpRight, ListTree } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { NoteBody } from "@/components/notes/note-body";
+import { ReadingProgress } from "@/components/notes/reading-progress";
+import { TocList } from "@/components/notes/toc-list";
 import { getPublicNote, getNoteNeighbours, getPublicNotes } from "@/content/notes";
 import { categoryLabel, formatDate, parseHeadings, readingTimeFromMarkdown } from "@/lib/notes";
 
@@ -32,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: note.title,
       description: note.description,
       url,
-      ...(note.publishedAt ? { publishedTime: note.publishedAt } : {}),
+      ...(note.publishedAt ?? note.updatedAt ? { publishedTime: note.publishedAt ?? note.updatedAt } : {}),
       ...(note.updatedAt ? { modifiedTime: note.updatedAt } : {}),
     },
     twitter: {
@@ -50,6 +53,11 @@ export default async function NotePage({ params }: Props) {
 
   const outline = parseHeadings(note.markdown);
   const { previous, next } = getNoteNeighbours(note.slug);
+  const others = getPublicNotes().filter((item) => item.slug !== note.slug);
+  const related = [
+    ...others.filter((item) => item.category === note.category),
+    ...others.filter((item) => item.category !== note.category),
+  ].slice(0, 2);
   const date = formatDate(note.publishedAt);
   const updated = formatDate(note.updatedAt);
   const minutes = readingTimeFromMarkdown(note.markdown);
@@ -75,7 +83,8 @@ export default async function NotePage({ params }: Props) {
   return (
     <>
       <SiteHeader current="/notes" />
-      <main>
+      <main id="contenu">
+        <ReadingProgress targetId="article-layout" />
         <article className="note-page">
           <div className="container-shell">
             <nav className="note-breadcrumb" aria-label="Fil d’Ariane">
@@ -91,17 +100,19 @@ export default async function NotePage({ params }: Props) {
               <h1>{note.title}</h1>
               <p className="note-header__lead">{note.description}</p>
               <div className="note-meta">
-                {date ? (
-                  <time dateTime={note.publishedAt}>{date}</time>
-                ) : (
-                  <span className="note-status">Version de travail — à vérifier</span>
+                {note.status === "review" && (
+                  <>
+                    <span className="note-status">Version de travail — à vérifier</span>
+                    <span aria-hidden="true">·</span>
+                  </>
                 )}
-                <span aria-hidden="true">·</span>
+                {date && <time dateTime={note.publishedAt}>{date}</time>}
+                {date && <span aria-hidden="true">·</span>}
                 <span>{minutes} min de lecture</span>
                 {updated && (
                   <>
                     <span aria-hidden="true">·</span>
-                    <span>Mis à jour le {updated}</span>
+                    <span>{date ? "Mis à jour le " : "Dernière révision : "}{updated}</span>
                   </>
                 )}
               </div>
@@ -119,27 +130,56 @@ export default async function NotePage({ params }: Props) {
               )}
             </header>
 
-            <div className="note-layout">
-              <aside className="note-toc" aria-labelledby="toc-titre">
+            <div className="note-layout" id="article-layout">
+              <details className="note-toc note-toc--compact">
+                <summary className="note-toc__title">
+                  <ListTree size={15} aria-hidden="true" /> Dans cette analyse
+                  <span className="note-toc__count">{outline.filter((item) => item.level === 2).length} sections</span>
+                </summary>
+                <TocList toc={toc} />
+              </details>
+
+              <aside className="note-toc note-toc--full" aria-labelledby="toc-titre">
                 <p className="note-toc__title" id="toc-titre"><ListTree size={15} aria-hidden="true" /> Dans cette analyse</p>
-                <ol>
-                  {toc.map((entry) => (
-                    <li key={entry.item.id}>
-                      <a href={`#${entry.item.id}`}>{entry.item.text}</a>
-                      {entry.children.length > 0 && (
-                        <ol>
-                          {entry.children.map((child) => (
-                            <li key={child.id}><a href={`#${child.id}`}>{child.text}</a></li>
-                          ))}
-                        </ol>
-                      )}
-                    </li>
-                  ))}
-                </ol>
+                <TocList toc={toc} />
               </aside>
 
               <div className="note-main">
                 <NoteBody markdown={note.markdown} outline={outline} />
+
+                <aside className="note-author" aria-label="À propos de l’auteur">
+                  <Image
+                    src="/eurinhash_portrait.png"
+                    alt=""
+                    width={56}
+                    height={56}
+                    className="note-author__img"
+                  />
+                  <div>
+                    <p className="note-author__name">Eurin Hash</p>
+                    <p className="note-author__line">
+                      Ingénierie logicielle, cloud et systèmes. <Link href="/a-propos">Mon parcours</Link>
+                      <span aria-hidden="true"> · </span>
+                      <Link href="/projets">Mes projets</Link>
+                    </p>
+                  </div>
+                </aside>
+
+                {related.length > 0 && (
+                  <section className="note-related" aria-labelledby="related-titre">
+                    <h2 id="related-titre">À lire ensuite</h2>
+                    <ul>
+                      {related.map((item) => (
+                        <li key={item.slug}>
+                          <Link href={`/notes/${item.slug}`}>
+                            <span className="note-related__cat">{categoryLabel(item.category)}</span>
+                            <span className="note-related__title">{item.title}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
 
                 <nav className="note-pager" aria-label="Navigation entre les analyses">
                   {previous ? (

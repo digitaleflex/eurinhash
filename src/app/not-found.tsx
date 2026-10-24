@@ -8,7 +8,7 @@ import { EmptyState } from "@/components/ui/empty-state";
 export default function NotFound() {
   return <>
     <SiteHeader current="" />
-    <main className="container-shell state-page">
+    <main id="contenu" className="container-shell state-page">
       <EmptyState
         icon={Compass}
         eyebrow="Erreur 404"

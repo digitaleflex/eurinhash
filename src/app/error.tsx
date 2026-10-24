@@ -20,7 +20,7 @@ export default function Error({ error, retry }: { error: unknown; reset: () => v
 
   return <>
     <SiteHeader current="" />
-    <main className="container-shell state-page">
+    <main id="contenu" className="container-shell state-page">
       <p className="eyebrow">Erreur inattendue</p>
       <h1 ref={titleRef} tabIndex={-1} className="mt-6 text-4xl font-semibold tracking-tight focus:outline-none sm:text-5xl">Cette section n’a pas pu s’afficher.</h1>
       <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted-foreground">Une erreur inattendue a interrompu le rendu de cette page. Le reste du site reste accessible.</p>

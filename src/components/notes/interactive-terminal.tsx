@@ -53,7 +53,7 @@ export function InteractiveTerminal({ title = "AURA Storage — inspection", ses
           <span className="terminal__session">{session}</span>
         </div>
 
-        <div className="terminal__body" id={terminalId} role="log" aria-live="polite">
+        <div className="terminal__body" id={terminalId}>
           <p className="terminal__prompt-line">
             <span className="terminal__prompt">visitor@eurinhash</span>
             <span className="terminal__sep" aria-hidden="true">:</span>
@@ -64,6 +64,9 @@ export function InteractiveTerminal({ title = "AURA Storage — inspection", ses
           <pre className="terminal__output">{step.output}</pre>
           <p className="terminal__flag">Sortie simulée — exemple pédagogique, pas un résultat d’exécution réelle.</p>
         </div>
+        <p className="sr-only" aria-live="polite">
+          Étape {index + 1} sur {steps.length} : {step.command}
+        </p>
 
         <div className="terminal__controls">
           <button type="button" className="terminal__btn" onClick={copy}>

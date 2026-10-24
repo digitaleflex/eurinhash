@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function Loading() {
   return <>
     <SiteHeader current="" />
-    <main role="status" aria-live="polite" aria-busy="true" className="container-shell">
+    <main id="contenu" role="status" aria-live="polite" aria-busy="true" className="container-shell">
       <span className="sr-only">Chargement de la page…</span>
       <div aria-hidden="true" className="flex min-h-[60vh] flex-col justify-center py-20">
         <Skeleton className="h-3 w-24" />

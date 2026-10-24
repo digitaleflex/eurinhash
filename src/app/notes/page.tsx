@@ -26,7 +26,7 @@ export default function NotesPage() {
   return (
     <>
       <SiteHeader current="/notes" />
-      <main>
+      <main id="contenu">
         <section className="notes-hero">
           <div className="container-shell">
             <p className="notes-ident">EURINHASH / RESEARCH</p>

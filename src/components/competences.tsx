@@ -41,7 +41,7 @@ export function Competences() {
     <section className="section" id="competences" aria-labelledby="competences-titre" ref={rootRef}>
       <div className="container-shell competences-grid">
         <div className="comp-editorial">
-          <div className="kicker comp-eyebrow">03 / Domaines d’exploration</div>
+          <div className="kicker comp-eyebrow" data-index="02">Domaines d’exploration</div>
           <h2 className="comp-title" id="competences-titre">
             <span>Mon terrain</span>
             <br />

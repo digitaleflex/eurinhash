@@ -12,7 +12,7 @@ const projects = [
 export default function ProjectsPage() {
   return <>
     <SiteHeader current="/projets" />
-    <main>
+    <main id="contenu">
       <section className="hero"><div className="container-shell hero-content">
         <div className="eyebrow">Portfolio · Projets sélectionnés</div><h1>Ce que je <span className="accent">construis.</span></h1>
         <p>Des projets personnels et des initiatives professionnelles que j’explore, développe ou fais évoluer. Leur présence ici ne signifie pas qu’ils sont tous achevés.</p>

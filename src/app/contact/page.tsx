@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 export default function ContactPage() {
   return <>
     <SiteHeader current="/contact" />
-    <main>
+    <main id="contenu">
       <section className="hero"><div className="container-shell hero-content">
         <div className="eyebrow">Contact</div><h1>Entrons en <span className="accent">conversation.</span></h1>
         <p>Pour parler de technologie, d’apprentissage, d’ingénierie ou d’un projet numérique, tu peux me retrouver sur GitHub.</p>

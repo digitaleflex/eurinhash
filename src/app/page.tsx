@@ -94,7 +94,7 @@ export default function Home() {
   return (
     <>
       <SiteHeader current="/" />
-      <main>
+      <main id="contenu">
         <ScrollReveals />
         <section className="hero hero--home" id="top">
           <HeroBackground />
@@ -104,7 +104,7 @@ export default function Home() {
         <section className="section" id="projets">
           <div className="container-shell">
             <div className="selected-rule">
-              <span className="kicker">Projets sélectionnés · 05 projets</span>
+              <span className="kicker" data-index="01">Projets sélectionnés · 05 projets</span>
             </div>
             <div className="selected-head" data-reveal>
               <h2>Des idées transformées en systèmes concrets.</h2>
@@ -147,10 +147,10 @@ export default function Home() {
 
         <Competences />
 
-        <section className="section">
+        <section className="section section--alt">
           <div className="container-shell method-grid">
             <div>
-              <div className="kicker">04 / Approche & méthode</div>
+              <div className="kicker" data-index="03">Approche &amp; méthode</div>
               <h2 data-reveal>Ma méthode.</h2>
               <p className="method-sub" data-reveal>Apprendre en construisant.</p>
               <p className="intro" data-reveal>Chaque projet est une occasion de comprendre, d’expérimenter et de progresser. Je pars du problème, je construis une solution adaptée et j’apprends de ce que le réel me renvoie.</p>
@@ -183,7 +183,7 @@ export default function Home() {
               />
             </div>
             <div className="about-body">
-              <div className="kicker" data-reveal>05 / À propos</div>
+              <div className="kicker" data-index="04" data-reveal>À propos</div>
               <h2 id="apropos-titre" data-reveal>Je veux comprendre ce que je construis.</h2>
               <p data-reveal>Je m’intéresse à ce qui se passe derrière la technologie : les systèmes qui font fonctionner les applications, les infrastructures qui les soutiennent et les mécanismes qui les rendent fiables.</p>
               <p data-reveal>Mon parcours s’est construit par l’exploration, l’expérimentation et la pratique. J’apprends en allant au-delà de ce qui est visible, en cherchant à comprendre les choix techniques, leurs conséquences et les possibilités qu’ils ouvrent.</p>
@@ -204,7 +204,7 @@ export default function Home() {
           <div className="container-shell">
             <div className="notes-home-head">
               <div data-reveal>
-                <p className="kicker">Notes &amp; analyses</p>
+                <p className="kicker" data-index="05">Notes &amp; analyses</p>
                 <h2 id="notes-home-titre">Comprendre les systèmes. Examiner les choix.</h2>
                 <p className="notes-home-lead">Des analyses techniques issues de projets réels : architecture, cloud, DevOps, qualité logicielle et systèmes d’apprentissage.</p>
               </div>
@@ -227,7 +227,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section">
+        <section className="section section--tight">
           <div className="container-shell"><div className="cta" data-reveal>
             <div className="kicker">Échangeons</div><h2>Une idée, une question, un projet ?</h2>
             <p className="intro">Je suis ouvert aux échanges autour du développement logiciel, du cloud, de la cybersécurité et de l’IA appliquée.</p>

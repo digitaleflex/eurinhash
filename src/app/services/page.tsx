@@ -14,7 +14,7 @@ const areas = [
 export default function SkillsPage() {
   return <>
     <SiteHeader current="/services" />
-    <main>
+    <main id="contenu">
       <section className="hero"><div className="container-shell hero-content">
         <div className="eyebrow">Compétences & centres d’intérêt</div><h1>Les domaines que <span className="accent">j’explore.</span></h1>
         <p>Cette page décrit mes axes de travail et d’apprentissage. Elle présente des compétences en développement, pas un catalogue de prestations commerciales.</p>

@@ -24,7 +24,7 @@ export default function GlobalError({ error, retry }: { error: unknown; reset: (
   return <html lang="fr">
     <body style={{ margin: 0, background: "#050914", color: "#f4f7fb", fontFamily: fontStack, WebkitFontSmoothing: "antialiased" }}>
       <style>{css}</style>
-      <main role="alert" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center", minHeight: "100vh", width: "min(640px, calc(100% - 48px))", margin: "0 auto", padding: "64px 0" }}>
+      <main id="contenu" role="alert" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center", minHeight: "100vh", width: "min(640px, calc(100% - 48px))", margin: "0 auto", padding: "64px 0" }}>
         <p style={{ margin: 0, color: "#7ab4ff", fontSize: ".8125rem", fontWeight: 600, letterSpacing: ".12em", textTransform: "uppercase" }}>Erreur inattendue</p>
         <h1 ref={titleRef} tabIndex={-1} style={{ margin: "24px 0 0", fontSize: "clamp(1.9rem, 5vw, 2.75rem)", fontWeight: 600, lineHeight: 1.1, letterSpacing: "-.03em" }}>Le site n’a pas pu s’afficher.</h1>
         <p style={{ margin: "16px 0 0", color: "#9eacc1", fontSize: "1.0625rem", lineHeight: 1.7 }}>Une erreur inattendue a interrompu le chargement. Tu peux réessayer ou revenir à l’accueil.</p>
