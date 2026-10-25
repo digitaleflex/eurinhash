@@ -8,7 +8,7 @@ export function SiteFooter() {
       <p className="mt-3 max-w-md text-sm leading-6 text-muted-foreground">Le site personnel d’Eurin Hash : parcours, projets, apprentissages et expérimentations en ingénierie numérique.</p>
     </div>
     <div className="flex flex-wrap items-center gap-5 text-sm text-muted-foreground">
-      <Link href="/projets">Mes projets</Link><Link href="/services">Compétences</Link><Link href="/a-propos">Mon parcours</Link><Link href="/contact">Contact</Link>
+      <Link href="/projets">Mes projets</Link><Link href="/services">Compétences</Link><Link href="/a-propos">Mon parcours</Link><Link href="/notes">Notes</Link><Link href="/contact">Contact</Link>
       <a href="https://github.com/digitaleflex" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17} /></a>
     </div>
   </div>

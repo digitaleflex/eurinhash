@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight, RefreshCw, ScanSearch, Terminal, Workflow } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Github, RefreshCw, ScanSearch, Terminal, Workflow } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { HeroBackground } from "@/components/hero-background";
@@ -9,83 +9,15 @@ import { ScrollReveals } from "@/components/scroll-reveals";
 import { Competences } from "@/components/competences";
 import { getPublicNotes } from "@/content/notes";
 import { categoryLabel } from "@/lib/notes";
+import { projects } from "@/content/projects";
+import { ProjectCard } from "@/components/project-card";
+import { StackMarquee } from "@/components/stack-marquee";
 
 const steps = [
   { n: "01", icon: ScanSearch, title: "Comprendre le problème", desc: "Explorer le besoin, identifier les contraintes et définir ce qui doit réellement être résolu." },
   { n: "02", icon: Workflow, title: "Penser la solution", desc: "Choisir une architecture cohérente, les bons outils et un équilibre réaliste entre simplicité et performance." },
   { n: "03", icon: Terminal, title: "Construire et vérifier", desc: "Développer, tester et documenter. Valider le fonctionnement réel plutôt que s’arrêter à une solution théorique." },
   { n: "04", icon: RefreshCw, title: "Apprendre et améliorer", desc: "Mesurer les limites, tirer des enseignements et faire évoluer la solution sans complexité inutile." },
-];
-
-type SelectedLink = { label: string; href: string; variant?: "primary" | "secondary" };
-
-type SelectedProject = {
-  id: string;
-  category: string;
-  title: string;
-  description: string;
-  tech: string[];
-  image: string;
-  alt: string;
-  links: SelectedLink[];
-  status?: string;
-};
-
-const selectedProjects: SelectedProject[] = [
-  {
-    id: "aura-storage",
-    category: "Cloud & infrastructure",
-    title: "AURA Storage",
-    description: "Une plateforme de stockage conçue pour organiser, transférer et gérer des fichiers à travers une infrastructure auto-hébergée, une API et des services de stockage compatibles S3.",
-    tech: ["Docker Compose", "Traefik", "PostgreSQL", "S3/SeaweedFS"],
-    image: "/aura_storage.webp",
-    alt: "Infrastructure de stockage : baies de serveurs, nuage lumineux et explorateur de fichiers.",
-    links: [
-      { label: "Explorer le projet", href: "https://github.com/digitaleflex/aura-storage", variant: "primary" },
-      { label: "Voir l’architecture", href: "https://github.com/digitaleflex/aura-storage/tree/main/docs#architecture", variant: "secondary" }
-    ]
-  },
-  {
-    id: "wpopsx",
-    category: "DevOps & observabilité",
-    title: "WPOpsX",
-    description: "Un environnement d’exploitation WordPress conçu autour de conteneurs, d’un reverse proxy et d’outils de supervision pour structurer le déploiement et l’observabilité.",
-    tech: ["Docker", "Traefik", "MariaDB", "Redis"],
-    image: "/wpopsx.webp",
-    alt: "Pile de conteneurs Docker, Traefik, MariaDB et Redis devant un tableau de bord de supervision.",
-    links: [{ label: "Explorer le projet", href: "https://github.com/digitaleflex/WPOpsX" }]
-  },
-  {
-    id: "hashcode-reboot",
-    category: "Full-stack & produit numérique",
-    title: "HashCode Reboot",
-    description: "Une plateforme pensée pour structurer l’intégration des membres, les parcours communautaires et la qualification des profils au sein de l’écosystème HashCode.",
-    tech: ["Next.js", "PostgreSQL", "Prisma", "BetterAuth"],
-    image: "/hashcode_reboot.webp",
-    alt: "Ordinateur portable affichant un tableau de bord, entouré de tuiles de profils et de progression.",
-    links: [{ label: "Explorer le projet", href: "https://github.com/digitaleflex/hashcode_reboot" }]
-  },
-  {
-    id: "eurinhash-ai-lab",
-    category: "IA appliquée & expérimentation",
-    title: "EurinHash AI Lab",
-    description: "Un laboratoire d’expérimentation consacré à l’évaluation des modèles d’IA, à l’orchestration des agents, à la résilience et à l’optimisation des coûts.",
-    tech: ["AI/ML", "Agents", "Benchmarks", "Prototypes"],
-    image: "/eurin_ai_lab.webp",
-    alt: "Laboratoire d’IA : cerveau lumineux dans un cube, entouré d’écrans de graphes et de mesures.",
-    links: [{ label: "Explorer le projet", href: "https://github.com/digitaleflex/eurinhash-ai-lab" }]
-  },
-  {
-    id: "joinhashcode",
-    category: "Cybersécurité & communauté",
-    title: "JoinHashCode",
-    description: "Une plateforme communautaire orientée vers l’apprentissage technique, la cybersécurité et la structuration de parcours de progression.",
-    tech: ["Next.js", "PostgreSQL", "Prisma", "BetterAuth"],
-    image: "/joinhashcode.webp",
-    alt: "Espace collaboratif : globe connecté, tuiles de parcours et cadenas de sécurité.",
-    links: [],
-    status: "En cours"
-  }
 ];
 
 export default function Home() {
@@ -101,42 +33,19 @@ export default function Home() {
           <HeroContent />
         </section>
 
+        <StackMarquee />
+
         <section className="section" id="projets">
           <div className="container-shell">
             <div className="selected-rule">
-              <span className="kicker" data-index="01">Projets sélectionnés · 05 projets</span>
+              <span className="kicker" data-index="01">Projets sélectionnés · {String(projects.length).padStart(2, "0")} projets</span>
             </div>
             <div className="selected-head" data-reveal>
               <h2>Des idées transformées en systèmes concrets.</h2>
               <p className="selected-intro">Une sélection de projets d’ingénierie logicielle, d’infrastructure, d’automatisation et d’expérimentation, choisis pour ce qu’ils m’apprennent à construire.</p>
             </div>
             <div className="selected-grid">
-              {selectedProjects.map((project, index) => {
-                const featured = index === 0;
-                return (
-                  <article key={project.id} className={featured ? "selected-card selected-card--featured" : "selected-card"} data-project-id={project.id} data-reveal data-reveal-delay={Math.min(index * 0.06, 0.24)}>
-                    <div className="selected-card-media">
-                      <Image src={project.image} alt={project.alt} fill sizes={featured ? "(max-width: 1000px) 100vw, 580px" : "(max-width: 760px) 100vw, 560px"} className="selected-card-img" />
-                      {featured && <span className="selected-card-badge">À la une</span>}
-                    </div>
-                    <div className="selected-card-body">
-                      <div className="selected-card-eyebrow">
-                        <span className="selected-card-index">{String(index + 1).padStart(2, "0")}</span>
-                        <span className="selected-card-category">{project.category}</span>
-                      </div>
-                      <h3 className="selected-card-title">{project.title}</h3>
-                      <p className="selected-card-desc">{project.description}</p>
-                      <ul className="selected-card-tech">
-                        {project.tech.map((tech) => <li key={tech}>{tech}</li>)}
-                      </ul>
-                      <div className="selected-card-actions">
-                        {project.links.map((link) => <Link key={link.href} className={link.variant ? `selected-card-link ${link.variant}` : "selected-card-link"} href={link.href} target="_blank" rel="noreferrer">{link.label} <ArrowRight size={13} /></Link>)}
-                        {project.status && <span className="selected-card-status">{project.status}</span>}
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
+              {projects.map((project, index) => <ProjectCard key={project.id} project={project} index={index} featured={index === 0} />)}
             </div>
             <div className="selected-footer" data-reveal>
               <p>Une sélection resserrée de projets, entre systèmes en construction, expérimentations et outils conçus pour répondre à des besoins concrets.</p>
@@ -231,7 +140,10 @@ export default function Home() {
           <div className="container-shell"><div className="cta" data-reveal>
             <div className="kicker">Échangeons</div><h2>Une idée, une question, un projet ?</h2>
             <p className="intro">Je suis ouvert aux échanges autour du développement logiciel, du cloud, de la cybersécurité et de l’IA appliquée.</p>
-            <Link className="button mt-5" href="/contact">Entrer en contact <ArrowUpRight size={16} /></Link>
+            <div className="actions">
+              <Link className="button" href="/contact">Entrer en contact <ArrowUpRight size={16} /></Link>
+              <a className="button secondary" href="https://github.com/digitaleflex" target="_blank" rel="noreferrer"><Github size={16} /> Voir mon GitHub</a>
+            </div>
           </div></div>
         </section>
       </main>

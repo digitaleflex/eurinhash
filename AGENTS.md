@@ -24,7 +24,7 @@ Personal portfolio of Eurin Hash: Next.js 16 App Router, React 19, Tailwind v4, 
 - Nav labels differ from paths: `/services` is labelled "Compétences", `/a-propos` is "Mon parcours", `/projets` is "Mes projets". The link list is hardcoded twice — in `src/components/site-header.tsx` and `src/components/site-footer.tsx` (the footer omits Notes) — so a new route needs editing both.
 - `src/app/[slug]/page.tsx` is a legacy duplicate: it holds its own `pages` map for the same five routes. The static folders win at request time, yet the dynamic route still builds duplicate paths. Do not add content there; delete it when touching routing, and never create both a folder and a map key for one route.
 - `src/app/layout.tsx` only sets `<html lang="fr">`, metadata and viewport. Each page composes `<SiteHeader current="/route" />` + `<SiteFooter />` itself, and `current` drives `aria-current`. `not-found.tsx` does the same.
-- Content is duplicated between pages (home project cards vs `projets/page.tsx`); there is no shared content module, so edits must be mirrored by hand.
+- Projects live in one module, `src/content/projects.ts` (`projects`, `initiatives`, `stack`), rendered by `ProjectCard` on the home page and `/projets`. Inner pages use `PageHero` (`src/components/page-hero.tsx`) for their hero. Edit content there, not in the pages.
 
 ## Conventions
 
