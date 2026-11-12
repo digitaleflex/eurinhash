@@ -1,5 +1,41 @@
 @import "tailwindcss";
 
+/* 
+   globals.css — sommaire (dans l'ordre du fichier)
+
+   · Motif de section : index technique + filet
+   · Typographie : Inter + JetBrains Mono (next/font)
+   · Jetons de couleur
+   · Échelle typographique : 8 niveaux (utiliser ces jetons, pas de taille en dur)
+   · Pont Tailwind : @theme inline (utilitaires bg-*, text-*, border-*)
+   · Base : reset, document, conteneur
+   · En-tête et navigation
+   · Composants communs : hero de base, étiquettes, boutons, sections, cartes
+   · À propos : portrait + éditorial
+   · Section Projets sélectionnés
+   · Hero : réseau de systèmes (couche décorative)
+   · Hero home : entrée pilotée par GSAP + SplitText (voir HeroContent)
+   · Héros de pages internes : apparition légère
+   · Hero EURINHASH : couche 1 photo + couche 2 GSAP + couche 3 Motion
+   · Hero centré : composition immersive
+   · Mon terrain d’ingénierie : Engineering Nexus
+   · Notes & analyses : index éditorial
+   · Notes & analyses : page d’article
+   · Blocs de code : coloration Prism
+   · Tableaux Markdown
+   · Terminal pédagogique
+   · Schémas techniques
+   · Micro-détails transverses
+   · Lecture : progression, sommaire actif, auteur, notes liées
+   · Accessibilité : évitement, contraste renforcé, transitions de page
+   · Finitions : survol, transitions de page, focus
+   · Finitions 2026-10 : header collant, bandeau technologies, héros internes
+
+   L'ORDRE COMPTE : les blocs « Finitions » surchargent des règles plus haut.
+   Ne déplace pas une section sans comparer le rendu avant/après.
+   Tailles : jetons --fs-* ; couleurs : jetons de :root (voir AGENTS.md).
+ */
+
 /* ——— Motif de section : index technique + filet ——— */
 
 .kicker[data-index] {
@@ -45,6 +81,8 @@
 html {
   -webkit-text-size-adjust: 100%;
 }
+
+/* ——— Jetons de couleur ——— */
 
 :root {
   --lime:#c5f441;
@@ -100,6 +138,8 @@ html {
   --fs-display: clamp(3.6rem,8vw,7.2rem);
 }
 
+/* ——— Pont Tailwind : @theme inline (utilitaires bg-*, text-*, border-*) ——— */
+
 @theme inline {
   --color-background:var(--bg);
   --color-foreground:var(--fg);
@@ -125,6 +165,8 @@ html {
   --text-title-l: var(--fs-title-l);
   --text-display: var(--fs-display);
 }
+
+/* ——— Base : reset, document, conteneur ——— */
 
 * {
   box-sizing: border-box;
@@ -152,6 +194,8 @@ a {
   width: min(1160px,calc(100% - 48px));
   margin: auto;
 }
+
+/* ——— En-tête et navigation ——— */
 
 .site-header {
   position: sticky;
@@ -223,6 +267,8 @@ a {
   color: var(--accent-bright);
   font-weight: 600;
 }
+
+/* ——— Composants communs : hero de base, étiquettes, boutons, sections, cartes ——— */
 
 .hero {
   position: relative;
@@ -345,7 +391,11 @@ a {
 .card {
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: linear-gradient(145deg,color-mix(in srgb, var(--card-top) 72.16%, transparent),color-mix(in srgb, var(--card-bottom) 85.88%, transparent));
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--card-top) 72.16%, transparent),
+    color-mix(in srgb, var(--card-bottom) 85.88%, transparent)
+  );
   padding: 24px;
 }
 
@@ -403,7 +453,9 @@ a {
   border-radius: 24px;
   overflow: hidden;
   background: var(--surface);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--white) 4%, transparent),0 24px 60px -40px color-mix(in srgb, var(--black) 90%, transparent);
+  box-shadow: 
+    inset 0 0 0 1px color-mix(in srgb, var(--white) 4%, transparent),
+    0 24px 60px -40px color-mix(in srgb, var(--black) 90%, transparent);
 }
 
 .about-portrait__img {
@@ -516,7 +568,9 @@ a {
   padding: clamp(28px,5vw,52px);
   border: 1px solid color-mix(in srgb, var(--accent-mid) 33.33%, transparent);
   border-radius: 24px;
-  background: radial-gradient(ellipse at 80% 50%,color-mix(in srgb, var(--accent-deep) 23.92%, transparent),transparent 45%),var(--surface-2);
+  background: 
+    radial-gradient(ellipse at 80% 50%,color-mix(in srgb, var(--accent-deep) 23.92%, transparent),transparent 45%),
+    var(--surface-2);
 }
 
 .cta h2 {
@@ -644,7 +698,11 @@ summary:focus-visible {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 20px;
-  background: linear-gradient(160deg,color-mix(in srgb, var(--card-top) 72%, transparent),color-mix(in srgb, var(--card-bottom) 88%, transparent));
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--card-top) 72%, transparent),
+    color-mix(in srgb, var(--card-bottom) 88%, transparent)
+  );
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--white) 2%, transparent);
   transition: transform .3s cubic-bezier(.22,.61,.36,1),border-color .3s ease,box-shadow .3s ease;
 }
@@ -677,7 +735,11 @@ summary:focus-visible {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(180deg,color-mix(in srgb, var(--bg) 0%, transparent) 45%,color-mix(in srgb, var(--bg) 62%, transparent) 100%);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--bg) 0%, transparent) 45%,
+    color-mix(in srgb, var(--bg) 62%, transparent) 100%
+  );
 }
 
 .selected-card-img {
@@ -978,7 +1040,11 @@ summary:focus-visible {
   position: absolute;
   inset: 0;
   opacity: .5;
-  background-image: radial-gradient(circle,color-mix(in srgb, var(--accent-bright) 22%, transparent) 1px,transparent 1.2px);
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-bright) 22%, transparent) 1px,
+    transparent 1.2px
+  );
   background-size: 34px 34px;
   background-position: 50% 50%;
   -webkit-mask-image: radial-gradient(ellipse 80% 76% at 54% 48%,transparent 26%,var(--black) 88%);
@@ -992,7 +1058,12 @@ summary:focus-visible {
   width: min(900px,80vw);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%,color-mix(in srgb, var(--accent-vivid) 18%, transparent),color-mix(in srgb, var(--accent-vivid) 7%, transparent) 44%,transparent 68%);
+  background: radial-gradient(
+    circle at 50% 50%,
+    color-mix(in srgb, var(--accent-vivid) 18%, transparent),
+    color-mix(in srgb, var(--accent-vivid) 7%, transparent) 44%,
+    transparent 68%
+  );
   transform: translate3d(calc(var(--px) * 10px),calc(var(--py) * 8px + var(--scroll,0) * 30px),0);
   transition: transform .9s cubic-bezier(.22,.61,.36,1);
   will-change: transform;
@@ -1003,7 +1074,12 @@ summary:focus-visible {
   inset: 0;
   opacity: 0;
   pointer-events: none;
-  background: radial-gradient(360px circle at var(--mx,62%) var(--my,42%),color-mix(in srgb, var(--accent-soft) 11%, transparent),color-mix(in srgb, var(--accent-soft) 3%, transparent) 46%,transparent 70%);
+  background: radial-gradient(
+    360px circle at var(--mx,62%) var(--my,42%),
+    color-mix(in srgb, var(--accent-soft) 11%, transparent),
+    color-mix(in srgb, var(--accent-soft) 3%, transparent) 46%,
+    transparent 70%
+  );
   transition: opacity 1s ease;
 }
 
@@ -1014,7 +1090,11 @@ summary:focus-visible {
 .hero-bg__visual {
   position: absolute;
   inset: 0;
-  transform: translate3d(calc(var(--px) * 6px),calc(var(--py) * 4px + var(--scroll,0) * 16px),0) scale(calc(1 + var(--scroll,0) * .05));
+  transform: translate3d(
+    calc(var(--px) * 6px),
+    calc(var(--py) * 4px + var(--scroll,0) * 16px),
+    0) scale(calc(1 + var(--scroll,0) * .05)
+  );
   transition: transform 1s cubic-bezier(.22,.61,.36,1);
   will-change: transform;
   animation: hero-bg-reveal .9s ease-out both;
@@ -1031,7 +1111,20 @@ summary:focus-visible {
 .hero-bg__veil {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg,color-mix(in srgb, var(--bg) 88%, transparent) 0%,color-mix(in srgb, var(--bg) 35%, transparent) 26%,color-mix(in srgb, var(--bg) 30%, transparent) 55%,var(--bg) 100%),radial-gradient(ellipse 72% 60% at 50% 44%,color-mix(in srgb, var(--ink) 66%, transparent),color-mix(in srgb, var(--ink) 28%, transparent) 58%,color-mix(in srgb, var(--ink) 0%, transparent) 78%);
+  background: 
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bg) 88%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 35%, transparent) 26%,
+      color-mix(in srgb, var(--bg) 30%, transparent) 55%,
+      var(--bg) 100%
+    ),
+    radial-gradient(
+      ellipse 72% 60% at 50% 44%,
+      color-mix(in srgb, var(--ink) 66%, transparent),
+      color-mix(in srgb, var(--ink) 28%, transparent) 58%,
+      color-mix(in srgb, var(--ink) 0%, transparent) 78%
+    );
 }
 
 .hero-ring > circle,
@@ -1185,7 +1278,20 @@ summary:focus-visible {
     background-size: 30px 30px;
   }
   .hero-bg__veil {
-    background: linear-gradient(180deg,color-mix(in srgb, var(--bg) 92%, transparent) 0%,color-mix(in srgb, var(--bg) 55%, transparent) 34%,color-mix(in srgb, var(--bg) 45%, transparent) 62%,var(--bg) 100%),radial-gradient(ellipse 92% 62% at 50% 40%,color-mix(in srgb, var(--ink) 62%, transparent),color-mix(in srgb, var(--ink) 22%, transparent) 60%,color-mix(in srgb, var(--ink) 0%, transparent) 80%);
+    background: 
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--bg) 92%, transparent) 0%,
+        color-mix(in srgb, var(--bg) 55%, transparent) 34%,
+        color-mix(in srgb, var(--bg) 45%, transparent) 62%,
+        var(--bg) 100%
+      ),
+      radial-gradient(
+        ellipse 92% 62% at 50% 40%,
+        color-mix(in srgb, var(--ink) 62%, transparent),
+        color-mix(in srgb, var(--ink) 22%, transparent) 60%,
+        color-mix(in srgb, var(--ink) 0%, transparent) 80%
+      );
   }
 }
 
@@ -1698,7 +1804,11 @@ summary:focus-visible {
 .notes-hero {
   padding: clamp(64px,9vw,110px) 0 clamp(48px,7vw,84px);
   border-bottom: 1px solid var(--line);
-  background: radial-gradient(ellipse 70% 120% at 15% 0%,color-mix(in srgb, var(--accent-indigo) 10%, transparent),transparent 60%);
+  background: radial-gradient(
+    ellipse 70% 120% at 15% 0%,
+    color-mix(in srgb, var(--accent-indigo) 10%, transparent),
+    transparent 60%
+  );
 }
 
 .notes-ident {
@@ -3521,7 +3631,9 @@ html {
 .page-hero__grid {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(color-mix(in srgb, var(--accent-bright) 7%, transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb, var(--accent-bright) 7%, transparent) 1px,transparent 1px);
+  background-image: 
+    linear-gradient(color-mix(in srgb, var(--accent-bright) 7%, transparent) 1px,transparent 1px),
+    linear-gradient(90deg,color-mix(in srgb, var(--accent-bright) 7%, transparent) 1px,transparent 1px);
   background-size: 56px 56px;
   -webkit-mask-image: radial-gradient(ellipse 70% 80% at 70% 30%,var(--black) 10%,transparent 75%);
   mask-image: radial-gradient(ellipse 70% 80% at 70% 30%,var(--black) 10%,transparent 75%);
@@ -3587,7 +3699,11 @@ html {
   padding: 20px 24px;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: linear-gradient(145deg,color-mix(in srgb, var(--card-top) 72.16%, transparent),color-mix(in srgb, var(--card-bottom) 85.88%, transparent));
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--card-top) 72.16%, transparent),
+    color-mix(in srgb, var(--card-bottom) 85.88%, transparent)
+  );
   backdrop-filter: blur(6px);
 }
 
@@ -3830,7 +3946,11 @@ html {
   padding: 24px;
   border: 1px solid var(--line);
   border-radius: 20px;
-  background: linear-gradient(145deg,color-mix(in srgb, var(--card-top) 72.16%, transparent),color-mix(in srgb, var(--card-bottom) 85.88%, transparent));
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--card-top) 72.16%, transparent),
+    color-mix(in srgb, var(--card-bottom) 85.88%, transparent)
+  );
   transition: border-color .25s ease,transform .25s ease;
 }
 
