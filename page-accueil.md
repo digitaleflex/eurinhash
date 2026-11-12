@@ -21,34 +21,21 @@ Composition en couches, texte centré (880 px max), hauteur min 92svh, aucune ha
   - Indicateur « Défiler pour explorer ↓ » → ancre `#projets` (masqué sur mobile et en `reduced-motion`).
 - Mobile : boutons empilés, domaines sur plusieurs lignes, halos masqués, globe atténué, pas de débordement horizontal.
 
-## 2. Projets sélectionnés (`#projets`)
-- Bandeau « Projets sélectionnés · 05 projets », titre « Des idées transformées en systèmes concrets. » + intro (sélection de projets d’ingénierie logicielle, d’infrastructure, d’automatisation et d’expérimentation).
-- Grille de 5 cartes (la 1re mise en avant, badge « À la une »), chacune : visuel WebP, index (01–05), catégorie, titre, description, technos, liens GitHub externes :
-  1. **AURA Storage** (Cloud & infrastructure) — stockage auto-hébergé, API, S3/SeaweedFS ; Docker Compose, Traefik, PostgreSQL. Liens : projet + architecture.
-  2. **WPOpsX** (DevOps & observabilité) — exploitation WordPress conteneurisée ; Docker, Traefik, MariaDB, Redis.
-  3. **HashCode Reboot** (Full-stack & produit) — intégration membres et parcours ; Next.js, PostgreSQL, Prisma, BetterAuth.
-  4. **EurinHash AI Lab** (IA appliquée) — évaluation de modèles, agents, résilience, coûts ; AI/ML, Agents, Benchmarks.
-  5. **JoinHashCode** (Cybersécurité & communauté) — plateforme d’apprentissage ; badge « En cours », sans lien externe.
-- Pied : « Une sélection resserrée de projets, entre systèmes en construction, expérimentations et outils conçus pour répondre à des besoins concrets. » + bouton « Explorer l’ensemble des projets » → `/projets`.
+## 2. Projets phares (`#projets`)
+- Bandeau « Projets phares », titre « Des idées transformées en systèmes concrets. » + intro.
+- **3 cartes** (`FEATURED_COUNT`), la 1re mise en avant (badge « À la une ») : AURA Storage, WPOpsX, HashCode Reboot. Chaque carte : visuel WebP, index, catégorie, titre, description, technos, lien GitHub.
+- Pied : nombre total de projets documentés + bouton « Explorer l’ensemble des projets » → `/projets` (les 5 projets, dont EurinHash AI Lab et JoinHashCode, y sont détaillés).
 
-## 3. Mon terrain d’ingénierie (`#competences`)
-Section éditoriale + grille minimaliste 2×2 (≥1280 px : éditorial 380 px + grille ; 1 colonne en dessous, 2 colonnes dès 768 px).
-- Surtitre « 03 / Domaines d’exploration », titre 2 lignes (seconde en dégradé blanc→bleu), accroche, paragraphe unique, lien texte « Explorer mes compétences ↗ » → `/services`.
-- 4 cartes propres : numéro, icône, titre h3, verbe d’action, description courte, 2 chips max, 1 projet vérifié (liens GitHub testés 200 ; JoinHashCode en texte « En cours », sans lien). Survol/focus = simple bordure ; aucun SVG, aucun cercle, aucun halo, aucune grille de fond.
-- Entrée GSAP orchestrée (titres puis cartes en cascade), statique sans JS et en `reduced-motion`.
+## 3. À propos (`#a-propos`)
+Portrait `/eurinhash_portrait.webp` (via `next/image`, 1254×1254) + texte court : repère « 02 / À propos », titre « Je veux comprendre ce que je construis. », deux paragraphes, lien « Lire mon parcours » → `/a-propos`. Le développement complet reste sur `/a-propos`.
 
-## 4. Ma méthode
-Éditorial 40 % + 4 étapes en 2×2 60 % (≥1024 px ; empilé en dessous, 2 colonnes dès 601 px). Surtitre « 04 / Approche & méthode », titre « Ma méthode. », sous-titre bleu « Apprendre en construisant. », intro (comprendre, expérimenter, progresser). Étapes : 01 Comprendre le problème (scan) · 02 Penser la solution (workflow) · 03 Construire et vérifier (terminal) · 04 Apprendre et améliorer (refresh) — icône + numéro discrets, h3, description courte, bordure au survol. Signature « Comprendre → Concevoir → Construire → Améliorer ».
+## 4. Notes & analyses (`#notes`)
+Alimentée par `getPublicNotes()` : les **2 dernières** analyses (`NOTES_COUNT`), brouillons exclus. Kicker « 03 / Notes & analyses », titre, accroche, lien « Toutes les analyses » → `/notes`. Cartes en 1 colonne mobile, 2 colonnes dès 900 px : catégorie · temps de lecture, titre cliquable (carte entière), résumé, « Lire l’analyse ».
 
-## 5. À propos (`#a-propos`)
-Grille portrait/éditorial (≥1024 px : portrait 400 px + texte ; 900–1023 px : 300 px + texte ; <900 px : une colonne). Portrait `/eurinhash_portrait.png` via `next/image` (1254×1254, `alt` « Portrait d’Eurin Hash », `sizes` 82vw/300px/400px), conteneur vertical 4/5, rayon 24 px, léger liseré interne, zoom maîtrisé (`scale` 1.22 desktop / 1.16 tablette / 1.08 mobile, origine haute) pour un cadrage tête-épaules sans déformation.
-Éditorial : repère « 05 / À propos », titre « Je veux comprendre ce que je construis. », 2 paragraphes d’introduction, sous-titres bleus « Penser au-delà du code. » et « Apprendre en construisant. » (2 paragraphes chacun), phrase forte « Je suis en mouvement : j’explore, je construis et j’apprends. » (filet bleu), paragraphe de clôture, lien « Découvrir mes projets » → `/projets`.
+## 5. Appel à l’action
+Carte « Échangeons — Une idée, une question, un projet ? » + « Entrer en contact » → `/contact` et « Voir mon GitHub ».
 
-## 6. Notes & analyses (`#notes`)
-Section alimentée par `getPublicNotes()` (3 dernières analyses publiées, brouillons exclus). En-tête : kicker « Notes & analyses », titre « Comprendre les systèmes. Examiner les choix. », accroche, lien « Toutes les analyses » → `/notes`. Aperçu en 3 cartes (1 colonne mobile) : catégorie · temps de lecture, titre `h3` cliquable (carte entière via overlay), résumé, « Lire l’analyse ». L’ancien bloc statique « À venir » a été supprimé.
-
-## 6. Appel à l’action
-Carte « Échangeons — Une idée, une question, un projet ? » (échanges : développement logiciel, cloud, cybersécurité, IA appliquée) + bouton « Entrer en contact » → `/contact`.
+> Les sections « Mon terrain d’ingénierie » (compétences) et « Ma méthode » ne sont plus sur l’accueil : les compétences vivent sur `/services`.
 
 ## Pied de page — `SiteFooter`
 Logo-image, description du site, liens (Mes projets · Compétences · Mon parcours · Contact, sans Notes), GitHub externe, mentions « © année Eurin Hash » + « Un espace personnel pour apprendre, construire et partager. »
@@ -56,4 +43,4 @@ Logo-image, description du site, liens (Mes projets · Compétences · Mon parco
 ## Comportements transverses
 - Révélation ScrollTrigger (`data-reveal`, une fois, +24 px / 0,7 s) sur têtes de section, cartes et CTA ; contenu toujours visible sans JS et en `reduced-motion`.
 - Images : visuels projets en WebP avec `alt` descriptifs ; fond hero décoratif (`aria-hidden`).
-- Vérifié : `typecheck`, `lint`, `build` (7 routes, prerender statique).
+- Vérifié : `typecheck`, `lint`, `test`, `build` (prerender statique).
