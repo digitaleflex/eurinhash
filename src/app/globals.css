@@ -67,6 +67,19 @@ html {
   --success:#3ed598;
 }
 
+/* ——— Échelle typographique : 8 niveaux (utiliser ces jetons, pas de taille en dur) ——— */
+
+:root {
+  --fs-micro: .75rem;
+  --fs-small: .875rem;
+  --fs-body: 1rem;
+  --fs-lead: clamp(1rem,1.4vw,1.125rem);
+  --fs-title-s: clamp(1.2rem,2.2vw,1.7rem);
+  --fs-title-m: clamp(2rem,4vw,3.4rem);
+  --fs-title-l: clamp(2.5rem,6vw,4.6rem);
+  --fs-display: clamp(3.6rem,8vw,7.2rem);
+}
+
 @theme inline {
   --color-background:var(--bg);
   --color-foreground:var(--fg);
@@ -83,6 +96,14 @@ html {
   --color-warning:var(--warning);
   --color-success:var(--success);
   --font-sans:var(--font-inter),Arial,Helvetica,sans-serif;
+  --text-micro: var(--fs-micro);
+  --text-small: var(--fs-small);
+  --text-body: var(--fs-body);
+  --text-lead: var(--fs-lead);
+  --text-title-s: var(--fs-title-s);
+  --text-title-m: var(--fs-title-m);
+  --text-title-l: var(--fs-title-l);
+  --text-display: var(--fs-display);
 }
 
 * {
@@ -127,7 +148,7 @@ a {
 }
 
 .nav-link {
-  font-size: .84rem;
+  font-size: var(--fs-small);
   color: var(--fg-muted);
   position: relative;
   transition: color .25s ease;
@@ -201,14 +222,14 @@ a {
 .eyebrow,
 .kicker {
   color: var(--accent-bright);
-  font-size: .72rem;
+  font-size: var(--fs-micro);
   letter-spacing: .15em;
   text-transform: uppercase;
   font-weight: 700;
 }
 
 .hero h1 {
-  font-size: clamp(3.6rem,8vw,7.2rem);
+  font-size: var(--fs-display);
   line-height: .95;
   letter-spacing: -.08em;
   max-width: 12ch;
@@ -225,7 +246,7 @@ a {
   max-width: 560px;
   color: var(--fg-muted);
   line-height: 1.8;
-  font-size: 1rem;
+  font-size: var(--fs-body);
   text-wrap: pretty;
 }
 
@@ -243,7 +264,7 @@ a {
   padding: 14px 19px;
   border-radius: 999px;
   background: var(--accent);
-  font-size: .88rem;
+  font-size: var(--fs-small);
   font-weight: 650;
   transition: background-color .2s ease,filter .2s ease;
 }
@@ -268,7 +289,7 @@ a {
   flex-wrap: wrap;
   margin-top: 42px;
   color: var(--fg-muted);
-  font-size: .78rem;
+  font-size: var(--fs-small);
 }
 
 .hero-tags span:before {
@@ -287,7 +308,7 @@ a {
 }
 
 .section h2 {
-  font-size: clamp(2rem,4vw,3.3rem);
+  font-size: var(--fs-title-m);
   letter-spacing: -.032em;
   line-height: 1.1;
   margin: 12px 0;
@@ -309,19 +330,19 @@ a {
 }
 
 .status {
-  font-size: .7rem;
+  font-size: var(--fs-micro);
   color: var(--fg-subtle);
 }
 
 .card h3 {
   margin: 12px 0 8px;
-  font-size: 1.1rem;
+  font-size: var(--fs-lead);
 }
 
 .card p {
   color: var(--fg-muted);
   line-height: 1.7;
-  font-size: .86rem;
+  font-size: var(--fs-small);
 }
 
 .tags {
@@ -332,7 +353,7 @@ a {
 }
 
 .tags span {
-  font-size: .68rem;
+  font-size: var(--fs-micro);
   color: var(--fg-muted);
   border: 1px solid var(--line);
   border-radius: 99px;
@@ -382,7 +403,7 @@ a {
 .about-body h2 {
   margin: 16px 0 0;
   max-width: 20ch;
-  font-size: clamp(2.3rem,4.2vw,3.6rem);
+  font-size: var(--fs-title-m);
   line-height: 1.05;
   letter-spacing: -.04em;
 }
@@ -391,14 +412,14 @@ a {
   margin: 22px 0 0;
   max-width: 60ch;
   color: var(--fg-muted);
-  font-size: 1.0625rem;
+  font-size: var(--fs-body);
   line-height: 1.8;
 }
 
 .about-body > p:first-of-type {
   margin-top: 30px;
   color: var(--fg);
-  font-size: 1.125rem;
+  font-size: var(--fs-lead);
   line-height: 1.75;
 }
 
@@ -446,14 +467,8 @@ a {
     transform: scale(1.08);
     transform-origin: 50% 10%;
   }
-  .about-body h2 {
-    font-size: clamp(2rem,9vw,2.6rem);
-  }
-  .about-body p {
-    font-size: 1rem;
-  }
   .about-body > p:first-of-type {
-    font-size: 1.05rem;
+    font-size: var(--fs-body);
   }
 }
 
@@ -473,7 +488,7 @@ a {
 }
 
 .note h3 {
-  font-size: .95rem;
+  font-size: var(--fs-body);
   line-height: 1.5;
 }
 
@@ -518,9 +533,6 @@ a {
   }
   .hero-content {
     padding: 75px 0 65px;
-  }
-  .hero h1 {
-    font-size: clamp(3.4rem,15vw,5.4rem);
   }
   .hero-tags {
     gap: 12px 18px;
@@ -595,7 +607,7 @@ summary:focus-visible {
   max-width: 34ch;
   color: var(--fg-muted);
   line-height: 1.8;
-  font-size: .95rem;
+  font-size: var(--fs-body);
 }
 
 .selected-grid {
@@ -670,7 +682,7 @@ summary:focus-visible {
   border-radius: 999px;
   background: rgba(5,9,20,.66);
   backdrop-filter: blur(8px);
-  font-size: .64rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -702,7 +714,7 @@ summary:focus-visible {
   align-items: center;
   gap: 9px;
   margin-bottom: 12px;
-  font-size: .66rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: .13em;
   text-transform: uppercase;
@@ -732,14 +744,14 @@ summary:focus-visible {
 
 .selected-card-title {
   margin: 0 0 10px;
-  font-size: 1.14rem;
+  font-size: var(--fs-lead);
   line-height: 1.35;
   letter-spacing: -.02em;
 }
 
 .selected-card--featured .selected-card-title {
   margin-bottom: 14px;
-  font-size: clamp(1.7rem,2.6vw,2.2rem);
+  font-size: var(--fs-title-s);
   line-height: 1.12;
   letter-spacing: -.045em;
 }
@@ -748,14 +760,14 @@ summary:focus-visible {
   flex: 1;
   margin: 0 0 18px;
   color: var(--fg-muted);
-  font-size: .9rem;
+  font-size: var(--fs-small);
   line-height: 1.75;
 }
 
 .selected-card--featured .selected-card-desc {
   max-width: 52ch;
   margin-bottom: 22px;
-  font-size: .97rem;
+  font-size: var(--fs-body);
 }
 
 .selected-card-tech {
@@ -772,7 +784,7 @@ summary:focus-visible {
   border: 1px solid var(--line);
   border-radius: 999px;
   background: rgba(255,255,255,.02);
-  font-size: .68rem;
+  font-size: var(--fs-micro);
   color: var(--fg-muted);
 }
 
@@ -789,7 +801,7 @@ summary:focus-visible {
   align-items: center;
   gap: 7px;
   min-height: 24px;
-  font-size: .83rem;
+  font-size: var(--fs-small);
   font-weight: 650;
   color: var(--accent-bright);
   transition: color .2s ease,background-color .2s ease;
@@ -832,7 +844,7 @@ summary:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: .83rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   line-height: 1.4;
   color: var(--fg-muted);
@@ -862,7 +874,7 @@ summary:focus-visible {
   margin: 0;
   max-width: 46ch;
   color: var(--fg-subtle);
-  font-size: .8rem;
+  font-size: var(--fs-small);
   line-height: 1.6;
 }
 
@@ -1232,7 +1244,7 @@ summary:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  font-size: .68rem;
+  font-size: var(--fs-micro);
   letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--fg-subtle);
@@ -1562,7 +1574,7 @@ summary:focus-visible {
 }
 
 .comp-node__num {
-  font-size: .72rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: .12em;
   color: var(--accent-bright);
@@ -1589,7 +1601,7 @@ summary:focus-visible {
 
 .comp-node__title {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: var(--fs-body);
   line-height: 1.3;
   letter-spacing: -.01em;
 }
@@ -1597,7 +1609,7 @@ summary:focus-visible {
 .comp-node__func {
   display: block;
   margin-top: 4px;
-  font-size: .68rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -1607,7 +1619,7 @@ summary:focus-visible {
 .comp-node__desc {
   margin: 14px 0 0;
   color: var(--fg-muted);
-  font-size: .87rem;
+  font-size: var(--fs-small);
   line-height: 1.7;
 }
 
@@ -1625,13 +1637,13 @@ summary:focus-visible {
   border: 1px solid var(--line);
   border-radius: 999px;
   background: rgba(255,255,255,.02);
-  font-size: .66rem;
+  font-size: var(--fs-micro);
   color: var(--fg-muted);
 }
 
 .comp-proj {
   margin: 14px 0 0;
-  font-size: .78rem;
+  font-size: var(--fs-small);
   line-height: 1.7;
   color: var(--fg-muted);
 }
@@ -1672,7 +1684,7 @@ summary:focus-visible {
 .notes-ident {
   margin: 0;
   color: var(--lime);
-  font-size: .7rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: .24em;
   text-transform: uppercase;
@@ -1681,7 +1693,7 @@ summary:focus-visible {
 .notes-hero__title {
   margin: 22px 0 0;
   max-width: 20ch;
-  font-size: clamp(2.5rem,6vw,4.6rem);
+  font-size: var(--fs-title-l);
   line-height: 1.04;
   letter-spacing: -.028em;
   font-weight: 600;
@@ -1692,7 +1704,7 @@ summary:focus-visible {
   margin: 26px 0 0;
   max-width: 62ch;
   color: var(--fg-muted);
-  font-size: clamp(1rem,1.4vw,1.125rem);
+  font-size: var(--fs-lead);
   line-height: 1.75;
 }
 
@@ -1711,7 +1723,7 @@ summary:focus-visible {
   padding-bottom: 5px;
   border-bottom: 1px solid rgba(122,180,255,.4);
   color: var(--accent-bright);
-  font-size: .92rem;
+  font-size: var(--fs-small);
   font-weight: 650;
   transition: color .2s ease,border-color .2s ease;
 }
@@ -1750,7 +1762,7 @@ summary:focus-visible {
 .notes-eyebrow {
   margin: 0;
   color: var(--accent-bright);
-  font-size: .7rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: .2em;
   text-transform: uppercase;
@@ -1759,7 +1771,7 @@ summary:focus-visible {
 .notes-lead {
   margin: 14px 0 0;
   color: var(--fg-muted);
-  font-size: .97rem;
+  font-size: var(--fs-body);
   line-height: 1.8;
 }
 
@@ -1794,12 +1806,12 @@ summary:focus-visible {
 }
 
 .notes-cat__label {
-  font-size: .88rem;
+  font-size: var(--fs-small);
   font-weight: 650;
 }
 
 .notes-cat__desc {
-  font-size: .74rem;
+  font-size: var(--fs-small);
   line-height: 1.55;
   color: var(--fg-subtle);
 }
@@ -1827,7 +1839,7 @@ summary:focus-visible {
   display: block;
   margin-bottom: 8px;
   color: var(--fg-subtle);
-  font-size: .72rem;
+  font-size: var(--fs-micro);
   letter-spacing: .12em;
   text-transform: uppercase;
 }
@@ -1854,7 +1866,7 @@ summary:focus-visible {
   background: none;
   color: var(--fg);
   font: inherit;
-  font-size: .88rem;
+  font-size: var(--fs-small);
   outline: none;
 }
 
@@ -1879,7 +1891,7 @@ summary:focus-visible {
   border-radius: 999px;
   background: transparent;
   color: var(--fg-muted);
-  font-size: .78rem;
+  font-size: var(--fs-small);
   cursor: pointer;
 }
 
@@ -1891,7 +1903,7 @@ summary:focus-visible {
 .notes-count {
   margin: 18px 0 0;
   color: var(--fg-subtle);
-  font-size: .78rem;
+  font-size: var(--fs-small);
 }
 
 .notes-list {
@@ -1954,7 +1966,7 @@ summary:focus-visible {
 
 .notes-item__cat {
   color: var(--lime);
-  font-size: .66rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: .16em;
   text-transform: uppercase;
@@ -1965,12 +1977,12 @@ summary:focus-visible {
   flex-wrap: wrap;
   gap: 6px;
   color: var(--fg-subtle);
-  font-size: .72rem;
+  font-size: var(--fs-micro);
 }
 
 .notes-item__title {
   margin: 0;
-  font-size: clamp(1.15rem,2vw,1.5rem);
+  font-size: var(--fs-title-s);
   line-height: 1.25;
   letter-spacing: -.02em;
   font-weight: 650;
@@ -1979,7 +1991,7 @@ summary:focus-visible {
 .notes-item__desc {
   margin: 0;
   color: var(--fg-muted);
-  font-size: .9rem;
+  font-size: var(--fs-small);
   line-height: 1.7;
   max-width: 70ch;
 }
@@ -2006,7 +2018,7 @@ summary:focus-visible {
   padding: 4px 9px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  font-size: .64rem;
+  font-size: var(--fs-micro);
   color: var(--fg-subtle);
 }
 
@@ -2015,7 +2027,7 @@ summary:focus-visible {
   align-items: center;
   gap: 6px;
   color: var(--accent-bright);
-  font-size: .78rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -2023,7 +2035,7 @@ summary:focus-visible {
 .notes-item__project {
   margin: 0;
   color: var(--fg-subtle);
-  font-size: .72rem;
+  font-size: var(--fs-micro);
 }
 
 .notes-item--lead .notes-card {
@@ -2032,7 +2044,7 @@ summary:focus-visible {
 }
 
 .notes-item--lead .notes-item__title {
-  font-size: clamp(1.6rem,3.2vw,2.3rem);
+  font-size: var(--fs-title-s);
   line-height: 1.12;
   letter-spacing: -.035em;
 }
@@ -2054,7 +2066,7 @@ summary:focus-visible {
 .notes-empty p {
   margin: 0 0 16px;
   color: var(--fg-muted);
-  font-size: .9rem;
+  font-size: var(--fs-small);
 }
 
 .notes-demarche {
@@ -2069,7 +2081,7 @@ summary:focus-visible {
 .notes-demarche__body p {
   margin: 0 0 18px;
   color: var(--fg-muted);
-  font-size: 1rem;
+  font-size: var(--fs-body);
   line-height: 1.85;
 }
 
@@ -2084,7 +2096,7 @@ summary:focus-visible {
 .notes-footer-nav p {
   margin: 0;
   color: var(--fg-subtle);
-  font-size: .85rem;
+  font-size: var(--fs-small);
 }
 
 .notes-footer-nav__links {
@@ -2108,7 +2120,7 @@ summary:focus-visible {
   margin: 14px 0 0;
   max-width: 56ch;
   color: var(--fg-muted);
-  font-size: .97rem;
+  font-size: var(--fs-body);
   line-height: 1.8;
 }
 
@@ -2144,7 +2156,7 @@ summary:focus-visible {
 
 .notes-preview__cat {
   color: var(--lime);
-  font-size: .64rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: .16em;
   text-transform: uppercase;
@@ -2152,7 +2164,7 @@ summary:focus-visible {
 
 .notes-preview__title {
   margin: 0;
-  font-size: 1.02rem;
+  font-size: var(--fs-body);
   line-height: 1.32;
   letter-spacing: -.015em;
   font-weight: 650;
@@ -2181,7 +2193,7 @@ summary:focus-visible {
 .notes-preview__desc {
   margin: 0;
   color: var(--fg-muted);
-  font-size: .85rem;
+  font-size: var(--fs-small);
   line-height: 1.65;
 }
 
@@ -2191,7 +2203,7 @@ summary:focus-visible {
   gap: 6px;
   margin-top: 2px;
   color: var(--accent-bright);
-  font-size: .76rem;
+  font-size: var(--fs-small);
   font-weight: 600;
 }
 
@@ -2219,7 +2231,7 @@ summary:focus-visible {
   align-items: center;
   gap: 8px;
   color: var(--fg-subtle);
-  font-size: .76rem;
+  font-size: var(--fs-small);
 }
 
 .note-breadcrumb a {
@@ -2243,7 +2255,7 @@ summary:focus-visible {
 .note-header__cat {
   margin: 0;
   color: var(--lime);
-  font-size: .68rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: .2em;
   text-transform: uppercase;
@@ -2252,7 +2264,7 @@ summary:focus-visible {
 .note-header h1 {
   margin: 16px 0 0;
   max-width: 22ch;
-  font-size: clamp(2.1rem,4.6vw,3.6rem);
+  font-size: var(--fs-title-m);
   line-height: 1.08;
   letter-spacing: -.025em;
   font-weight: 600;
@@ -2263,7 +2275,7 @@ summary:focus-visible {
   margin: 20px 0 0;
   max-width: 62ch;
   color: var(--fg-muted);
-  font-size: clamp(1rem,1.5vw,1.12rem);
+  font-size: var(--fs-lead);
   line-height: 1.7;
 }
 
@@ -2274,7 +2286,7 @@ summary:focus-visible {
   gap: 8px;
   margin-top: 22px;
   color: var(--fg-subtle);
-  font-size: .76rem;
+  font-size: var(--fs-small);
 }
 
 .note-status {
@@ -2284,7 +2296,7 @@ summary:focus-visible {
 .note-project {
   margin: 14px 0 0;
   color: var(--fg-subtle);
-  font-size: .8rem;
+  font-size: var(--fs-small);
 }
 
 .note-project a {
@@ -2329,7 +2341,7 @@ summary:focus-visible {
   content: "+";
   margin-left: auto;
   color: var(--fg-subtle);
-  font-size: 1rem;
+  font-size: var(--fs-body);
   line-height: 1;
 }
 
@@ -2344,7 +2356,7 @@ summary:focus-visible {
 .note-toc__count {
   margin-left: auto;
   color: var(--fg-subtle);
-  font-size: .66rem;
+  font-size: var(--fs-micro);
   letter-spacing: .06em;
   text-transform: none;
 }
@@ -2364,7 +2376,7 @@ summary:focus-visible {
   gap: 8px;
   margin: 0 0 14px;
   color: var(--fg-subtle);
-  font-size: .7rem;
+  font-size: var(--fs-micro);
   letter-spacing: .14em;
   text-transform: uppercase;
 }
@@ -2373,14 +2385,14 @@ summary:focus-visible {
   margin: 0;
   padding-left: 18px;
   color: var(--fg-muted);
-  font-size: .82rem;
+  font-size: var(--fs-small);
   line-height: 1.7;
 }
 
 .note-toc ol ol {
   margin-top: 6px;
   color: var(--fg-subtle);
-  font-size: .78rem;
+  font-size: var(--fs-small);
 }
 
 .note-toc li + li {
@@ -2398,7 +2410,7 @@ summary:focus-visible {
 .note-prose {
   max-width: 68ch;
   color: var(--fg-muted);
-  font-size: 1.0125rem;
+  font-size: var(--fs-body);
   line-height: 1.85;
   text-wrap: pretty;
 }
@@ -2406,7 +2418,7 @@ summary:focus-visible {
 .note-prose h2 {
   margin: 52px 0 0;
   color: var(--fg);
-  font-size: clamp(1.4rem,2.4vw,1.85rem);
+  font-size: var(--fs-title-s);
   line-height: 1.25;
   letter-spacing: -.025em;
   scroll-margin-top: 96px;
@@ -2415,7 +2427,7 @@ summary:focus-visible {
 .note-prose h3 {
   margin: 34px 0 0;
   color: var(--fg);
-  font-size: 1.12rem;
+  font-size: var(--fs-lead);
   line-height: 1.4;
   scroll-margin-top: 96px;
 }
@@ -2446,7 +2458,7 @@ summary:focus-visible {
   background: #0b1424;
   color: #dfe8f6;
   font-family: var(--font-mono);
-  font-size: .88em;
+  font-size: .88em; /* exception : relatif au texte parent (code en ligne) */
   overflow-wrap: anywhere;
 }
 
@@ -2485,7 +2497,7 @@ summary:focus-visible {
 
 .codeblock__lang {
   color: var(--fg-muted);
-  font-size: .64rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -2506,7 +2518,7 @@ summary:focus-visible {
   border-radius: 999px;
   background: transparent;
   color: var(--fg-muted);
-  font-size: .7rem;
+  font-size: var(--fs-micro);
   cursor: pointer;
   transition: color .2s ease,border-color .2s ease;
 }
@@ -2529,7 +2541,7 @@ summary:focus-visible {
   margin: 0;
   padding: 14px 0;
   font-family: var(--font-mono);
-  font-size: .82rem;
+  font-size: var(--fs-small);
   line-height: 1.65;
   min-width: max-content;
 }
@@ -2558,7 +2570,7 @@ summary:focus-visible {
   padding: 10px 16px;
   border-top: 1px solid var(--line);
   color: var(--fg-subtle);
-  font-size: .74rem;
+  font-size: var(--fs-small);
   line-height: 1.6;
 }
 
@@ -2589,7 +2601,7 @@ summary:focus-visible {
   padding: 12px 8px 12px 12px;
   color: #3f4d66;
   font-family: var(--font-mono);
-  font-size: .82rem;
+  font-size: var(--fs-small);
   line-height: 1.65;
   text-align: right;
   user-select: none;
@@ -2603,7 +2615,7 @@ summary:focus-visible {
   background: transparent;
   color: #dfe8f6;
   font-family: var(--font-mono);
-  font-size: .82rem;
+  font-size: var(--fs-small);
   line-height: 1.65;
   resize: vertical;
   outline: none;
@@ -2626,7 +2638,7 @@ summary:focus-visible {
 .note-prose table {
   width: 100%;
   border-collapse: collapse;
-  font-size: .84rem;
+  font-size: var(--fs-small);
 }
 
 .note-prose th,
@@ -2640,7 +2652,7 @@ summary:focus-visible {
 .note-prose thead th {
   background: #0b1424;
   color: var(--fg);
-  font-size: .72rem;
+  font-size: var(--fs-micro);
   letter-spacing: .1em;
   text-transform: uppercase;
 }
@@ -2699,13 +2711,13 @@ summary:focus-visible {
   align-items: center;
   gap: 6px;
   color: var(--fg-muted);
-  font-size: .72rem;
+  font-size: var(--fs-micro);
 }
 
 .terminal__session {
   margin-left: auto;
   color: var(--fg-subtle);
-  font-size: .66rem;
+  font-size: var(--fs-micro);
   letter-spacing: .1em;
   text-transform: uppercase;
 }
@@ -2715,7 +2727,7 @@ summary:focus-visible {
   overflow: auto;
   padding: 14px 16px;
   font-family: var(--font-mono);
-  font-size: .8rem;
+  font-size: var(--fs-small);
   line-height: 1.7;
 }
 
@@ -2753,7 +2765,7 @@ summary:focus-visible {
 .terminal__flag {
   margin: 10px 0 0;
   color: var(--lime);
-  font-size: .7rem;
+  font-size: var(--fs-micro);
 }
 
 .terminal__controls {
@@ -2775,7 +2787,7 @@ summary:focus-visible {
   border-radius: 999px;
   background: transparent;
   color: var(--fg-muted);
-  font-size: .72rem;
+  font-size: var(--fs-micro);
   cursor: pointer;
 }
 
@@ -2801,7 +2813,7 @@ summary:focus-visible {
 .terminal__progress {
   margin-left: auto;
   color: var(--fg-subtle);
-  font-size: .7rem;
+  font-size: var(--fs-micro);
   font-variant-numeric: tabular-nums;
 }
 
@@ -2821,7 +2833,7 @@ summary:focus-visible {
 .terminal__explain-title {
   margin: 0 0 6px;
   color: var(--fg-subtle);
-  font-size: .66rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -2830,7 +2842,7 @@ summary:focus-visible {
 .terminal__explain p:last-child {
   margin: 0;
   color: var(--fg-muted);
-  font-size: .82rem;
+  font-size: var(--fs-small);
   line-height: 1.65;
 }
 
@@ -2848,7 +2860,7 @@ summary:focus-visible {
 .diagram__title {
   margin: 0 0 14px;
   color: var(--fg);
-  font-size: .74rem;
+  font-size: var(--fs-small);
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -2869,7 +2881,7 @@ summary:focus-visible {
 
 .diag-node text {
   fill: #dfe8f6;
-  font-size: 13px;
+  font-size: 13px; /* exception : unités du viewBox SVG, liées à la géométrie des cadres */
 }
 
 .diag-node--accent rect {
@@ -2906,7 +2918,7 @@ summary:focus-visible {
 
 .diag-edge-label {
   fill: #9fb2cc;
-  font-size: 12px;
+  font-size: var(--fs-micro);
   paint-order: stroke;
   stroke: #0a1120;
   stroke-width: 4px;
@@ -2921,7 +2933,7 @@ summary:focus-visible {
   padding: 0;
   list-style: none;
   color: var(--fg-subtle);
-  font-size: .72rem;
+  font-size: var(--fs-micro);
 }
 
 .diagram__legend li {
@@ -2954,7 +2966,7 @@ summary:focus-visible {
 .diagram__caption {
   margin: 12px 0 0;
   color: var(--fg-subtle);
-  font-size: .74rem;
+  font-size: var(--fs-small);
   line-height: 1.6;
 }
 
@@ -2971,7 +2983,7 @@ summary:focus-visible {
   display: block;
   margin-bottom: 6px;
   color: var(--lime);
-  font-size: .72rem;
+  font-size: var(--fs-micro);
   letter-spacing: .14em;
   text-transform: uppercase;
 }
@@ -2982,7 +2994,7 @@ summary:focus-visible {
 
 .note-callout p:last-child {
   margin: 0;
-  font-size: .92rem;
+  font-size: var(--fs-small);
   line-height: 1.75;
 }
 
@@ -3017,7 +3029,7 @@ summary:focus-visible {
   align-items: center;
   gap: 6px;
   color: var(--fg-subtle);
-  font-size: .7rem;
+  font-size: var(--fs-micro);
   letter-spacing: .12em;
   text-transform: uppercase;
 }
@@ -3028,7 +3040,7 @@ summary:focus-visible {
 
 .note-pager__label {
   color: var(--fg);
-  font-size: .95rem;
+  font-size: var(--fs-body);
   font-weight: 600;
   line-height: 1.4;
 }
@@ -3185,14 +3197,14 @@ summary:focus-visible {
 .note-author__name {
   margin: 0;
   color: var(--fg);
-  font-size: .95rem;
+  font-size: var(--fs-body);
   font-weight: 650;
 }
 
 .note-author__line {
   margin: 4px 0 0;
   color: var(--fg-muted);
-  font-size: .82rem;
+  font-size: var(--fs-small);
   line-height: 1.6;
 }
 
@@ -3209,7 +3221,7 @@ summary:focus-visible {
 .note-related h2 {
   margin: 0 0 12px;
   color: var(--fg-subtle);
-  font-size: .68rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: .16em;
   text-transform: uppercase;
@@ -3246,7 +3258,7 @@ summary:focus-visible {
 
 .note-related__cat {
   color: var(--lime);
-  font-size: .62rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: .16em;
   text-transform: uppercase;
@@ -3254,7 +3266,7 @@ summary:focus-visible {
 
 .note-related__title {
   color: var(--fg);
-  font-size: .92rem;
+  font-size: var(--fs-small);
   line-height: 1.4;
   font-weight: 600;
 }
@@ -3282,7 +3294,7 @@ summary:focus-visible {
   border-radius: 0 0 10px 10px;
   background: var(--accent);
   color: #fff;
-  font-size: .85rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   transition: top .18s ease;
 }
@@ -3438,7 +3450,7 @@ html {
   gap: 44px;
   white-space: nowrap;
   font-family: var(--font-mono);
-  font-size: .82rem;
+  font-size: var(--fs-small);
   letter-spacing: .04em;
   color: var(--fg-subtle);
 }
@@ -3561,12 +3573,12 @@ html {
 
 .hero-stats dt {
   color: var(--fg-muted);
-  font-size: .88rem;
+  font-size: var(--fs-small);
 }
 
 .hero-stats dd {
   margin: 0;
-  font-size: 2.4rem;
+  font-size: var(--fs-title-m);
   font-weight: 600;
   letter-spacing: -.04em;
   font-variant-numeric: tabular-nums;
@@ -3606,7 +3618,7 @@ html {
   background: rgba(5,9,20,.78);
   border: 1px solid var(--line);
   backdrop-filter: blur(10px);
-  font-size: .78rem;
+  font-size: var(--fs-small);
   color: var(--fg);
 }
 
@@ -3653,7 +3665,7 @@ html {
   position: relative;
   padding-left: 20px;
   color: var(--fg-muted);
-  font-size: .9rem;
+  font-size: var(--fs-small);
 }
 
 .selected-card-focus li::before {
@@ -3697,7 +3709,7 @@ html {
   align-items: center;
   gap: 10px;
   margin: 0 0 16px;
-  font-size: 1rem;
+  font-size: var(--fs-body);
   font-weight: 600;
 }
 
@@ -3719,7 +3731,7 @@ html {
   border: 1px solid var(--line);
   border-radius: 999px;
   font-family: var(--font-mono);
-  font-size: .74rem;
+  font-size: var(--fs-small);
   color: var(--fg-muted);
 }
 
@@ -3743,7 +3755,7 @@ html {
 
 .big-quote p {
   margin: 0;
-  font-size: clamp(1.5rem,3.2vw,2.4rem);
+  font-size: var(--fs-title-s);
   line-height: 1.3;
   letter-spacing: -.03em;
   font-weight: 500;
@@ -3753,7 +3765,7 @@ html {
 .big-quote footer {
   margin-top: 22px;
   color: var(--accent-bright);
-  font-size: .78rem;
+  font-size: var(--fs-small);
   letter-spacing: .15em;
   text-transform: uppercase;
   font-weight: 700;
@@ -3775,7 +3787,7 @@ html {
   padding: 8px 14px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  font-size: .84rem;
+  font-size: var(--fs-small);
   color: var(--fg-muted);
   background: rgba(10,17,32,.6);
 }
@@ -3820,7 +3832,7 @@ html {
 }
 
 .channel__label {
-  font-size: .72rem;
+  font-size: var(--fs-micro);
   letter-spacing: .15em;
   text-transform: uppercase;
   font-weight: 700;
@@ -3828,13 +3840,13 @@ html {
 }
 
 .channel__value {
-  font-size: 1.08rem;
+  font-size: var(--fs-lead);
   font-weight: 600;
   overflow-wrap: anywhere;
 }
 
 .channel__hint {
-  font-size: .86rem;
+  font-size: var(--fs-small);
   color: var(--fg-muted);
 }
 
@@ -3870,7 +3882,7 @@ html {
   margin-bottom: 14px;
   font-family: var(--font-mono);
   color: var(--accent-soft);
-  font-size: .82rem;
+  font-size: var(--fs-small);
 }
 
 @media(max-width:850px) {
@@ -3895,9 +3907,6 @@ html {
     height: 420px;
     right: -180px;
     top: -200px;
-  }
-  .hero-stats dd {
-    font-size: 2rem;
   }
 }
 
