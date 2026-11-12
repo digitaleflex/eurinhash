@@ -35,7 +35,7 @@ export default function AboutPage() {
         eyebrow="Mon parcours"
         title={<>Je suis <span className="accent">Eurin Hash.</span></>}
         aside={<figure className="hero-portrait">
-          <Image src="/eurinhash_portrait.png" alt="Portrait d’Eurin Hash" width={1254} height={1254} priority sizes="(max-width: 900px) 70vw, 380px" />
+          <Image src="/eurinhash_portrait.webp" alt="Portrait d’Eurin Hash" width={1254} height={1254} priority sizes="(max-width: 900px) 70vw, 380px" />
           <figcaption><span className="hero-portrait__dot" aria-hidden="true" /> Ingénierie logicielle &amp; infrastructure</figcaption>
         </figure>}
       >

@@ -149,7 +149,7 @@ export default async function NotePage({ params }: Props) {
 
                 <aside className="note-author" aria-label="À propos de l’auteur">
                   <Image
-                    src="/eurinhash_portrait.png"
+                    src="/eurinhash_portrait.webp"
                     alt=""
                     width={56}
                     height={56}

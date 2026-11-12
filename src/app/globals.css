@@ -276,7 +276,7 @@ html{-webkit-text-size-adjust:100%}
 .notes-preview__item:has(.notes-preview__link:focus-visible){outline:2px solid var(--accent-soft);outline-offset:2px}
 .notes-preview__desc{margin:0;color:var(--fg-muted);font-size:.85rem;line-height:1.65}
 .notes-preview__cta{display:inline-flex;align-items:center;gap:6px;margin-top:2px;color:var(--accent-bright);font-size:.76rem;font-weight:600}
-@media(min-width:900px){.notes-preview{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:900px){.notes-preview{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){.notes-preview__item{transition:none}}
 
 /* ——— Notes & analyses : page d’article ——— */
